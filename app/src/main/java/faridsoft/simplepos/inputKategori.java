@@ -194,14 +194,14 @@ public void simpandata(){
     SQLiteDatabase db = dbHelper.getWritableDatabase();
     if(!edit) {
         if (!cekvalidasi(text1.getText().toString(), text2.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "Kode atau nama kategori sudah ada!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.duplikasikode, Toast.LENGTH_LONG).show();
             return;
         }
         db.execSQL("insert into t_kategori values('" +
                 text1.getText().toString() + "','" +
 
                 text2.getText().toString() + "')");
-        Toast.makeText(getApplicationContext(), "Data berhasil disimpan!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
         datakategori("");
         text1.setText("");text2.setText("");text1.requestFocus();
     }
@@ -209,11 +209,11 @@ public void simpandata(){
 
         Cursor result = db.rawQuery("select * from t_kategori where c_kode!='"+text1.getText().toString()+"' and c_namakategori='"+text2.getText().toString()+"'", null);
         if(result.getCount()>0) {
-            Toast.makeText(getApplicationContext(), "Nama kategori sudah ada!", Toast.LENGTH_LONG).show();return;
+            Toast.makeText(getApplicationContext(), R.string.duplikasinama, Toast.LENGTH_LONG).show();return;
         }
         else {
             db.execSQL("update t_kategori set c_namakategori='"+text2.getText().toString()+"' where c_kode='"+text1.getText().toString()+"'");
-            Toast.makeText(getApplicationContext(), "Data berhasil diubah!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
             edit=false;
             text1.setEnabled(true);
             datakategori("");
@@ -255,7 +255,7 @@ public void simpandata(){
 
                 final CharSequence[] dialogitem = { getString(R.string.ubah), getString(R.string.hapus)};
                 AlertDialog.Builder builder = new AlertDialog.Builder(inputKategori.this);
-                builder.setTitle("Pilih menu");
+                builder.setTitle(R.string.pilih);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 builder.setItems(dialogitem, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -277,15 +277,15 @@ public void simpandata(){
                                 break;
                             case 1 :
                                 new AlertDialog.Builder(inputKategori.this)
-                                        .setTitle("Hapus Kategori")
-                                        .setMessage("Yakin dihapus?")
+                                        .setTitle(R.string.hapus)
+                                        .setMessage(R.string.yakin)
                                         .setNegativeButton(android.R.string.no, null)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                             public void onClick(DialogInterface arg0, int arg1) {
                                                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                                                 db.execSQL("delete from t_kategori where c_kode = '"+kodekat+"'");
-                                                Toast.makeText(getApplicationContext(), "Data berhasil dihapus!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
                                                 datakategori("");
                                                 txtcari = (EditText) findViewById(R.id.search);
                                                 txtcari.setText("");

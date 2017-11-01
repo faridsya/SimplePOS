@@ -87,7 +87,7 @@ public class inputsatuan extends AppCompatActivity {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 if(text1.getText().toString().matches("")||text2.getText().toString().matches("")){
-                    Toast.makeText(getApplicationContext(), "Data belum lengkap!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.belumlengkap, Toast.LENGTH_LONG).show();
                     return;
                 }
                 simpandata();
@@ -202,14 +202,14 @@ public class inputsatuan extends AppCompatActivity {
 
         if(!edit) {
             if (!cekvalidasi(text1.getText().toString(), text2.getText().toString())) {
-                Toast.makeText(getApplicationContext(), "Kode atau nama satuan sudah ada!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.duplikasikode, Toast.LENGTH_LONG).show();
                 return;
             }
             db.execSQL("insert into t_satuan values('" +
                     text1.getText().toString() + "','" +
 
                     text2.getText().toString() + "')");
-            Toast.makeText(getApplicationContext(), "Data berhasil disimpan!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
             datakategori("");
             text1.setText("");text2.setText("");text1.requestFocus();
         }
@@ -217,11 +217,11 @@ public class inputsatuan extends AppCompatActivity {
 
             Cursor result = db.rawQuery("select * from t_satuan where c_kodesatuan!='"+text1.getText().toString()+"' and c_satuan='"+text2.getText().toString()+"'", null);
             if(result.getCount()>0) {
-                Toast.makeText(getApplicationContext(), "Nama satuan sudah ada!", Toast.LENGTH_LONG).show();return;
+                Toast.makeText(getApplicationContext(), R.string.duplikasinama, Toast.LENGTH_LONG).show();return;
             }
             else {
                 db.execSQL("update t_satuan set c_satuan='"+text2.getText().toString()+"' where c_kodesatuan='"+text1.getText().toString()+"'");
-                Toast.makeText(getApplicationContext(), "Data berhasil diubah!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
                 edit=false;
                 text1.setEnabled(true);
                 datakategori("");

@@ -145,7 +145,7 @@ public class ListSatuan extends ArrayAdapter<String> {
                                                             dbHelper = new DataHelper(activity);
                                                             SQLiteDatabase db = dbHelper.getWritableDatabase();
                                                             db.execSQL("delete from t_satuan where c_kodesatuan = '"+kodekat+"'");
-                                                            Toast.makeText(activity, R.string.yakin, Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(activity, R.string.sukses, Toast.LENGTH_LONG).show();
                                                             if(activity instanceof inputsatuan){
                                                                 ((inputsatuan)activity).datakategori("");
                                                             }

@@ -83,6 +83,7 @@ public ProgressDialog spinner;
     }
 
     public boolean hapussatuan(){
+
         return true;
     }
 

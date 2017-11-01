@@ -64,7 +64,7 @@ public class inputPelanggan extends AppCompatActivity {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 if(text1.getText().toString().matches("")||text2.getText().toString().matches("")){
-                    Toast.makeText(getApplicationContext(), "Data belum lengkap!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),R.string.belumlengkap, Toast.LENGTH_LONG).show();
                     return;
                 }
                 simpandata();
@@ -129,7 +129,7 @@ public class inputPelanggan extends AppCompatActivity {
 
         if(!edit) {
             if (!cekvalidasi(text1.getText().toString(), text2.getText().toString())) {
-                Toast.makeText(getApplicationContext(), "Kode atau nama pelanggan sudah ada!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.duplikasikode, Toast.LENGTH_LONG).show();
                 return;
             }
             db.execSQL("insert into t_pelanggan values('" +
@@ -138,7 +138,7 @@ public class inputPelanggan extends AppCompatActivity {
                     text3.getText().toString() + "','" +
 
                     text4.getText().toString() + "',0)");
-            Toast.makeText(getApplicationContext(), "Data berhasil disimpan!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
 
             text1.setText("");text2.setText("");text3.setText("");text4.setText("");text1.requestFocus();
         }
@@ -146,11 +146,11 @@ public class inputPelanggan extends AppCompatActivity {
 
             Cursor result = db.rawQuery("select * from t_pelanggan where c_idpelanggan!='"+text1.getText().toString()+"' and c_pelanggan='"+text2.getText().toString()+"'", null);
             if(result.getCount()>0) {
-                Toast.makeText(getApplicationContext(), "Nama pelanggan sudah ada!", Toast.LENGTH_LONG).show();return;
+                Toast.makeText(getApplicationContext(), R.string.duplikasinama, Toast.LENGTH_LONG).show();return;
             }
             else {
                 db.execSQL("update t_pelanggan set c_pelanggan='"+text2.getText().toString()+"',c_alamat='"+text3.getText().toString()+"',c_telp='"+text4.getText().toString()+"' where c_idpelanggan='"+text1.getText().toString()+"'");
-                Toast.makeText(getApplicationContext(), "Data berhasil diubah!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),R.string.sukses, Toast.LENGTH_LONG).show();
 
                 //text1.setEnabled(true);
 
