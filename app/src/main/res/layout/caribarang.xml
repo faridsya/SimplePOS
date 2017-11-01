@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/grid_color_selector"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    <TextView
+        android:id="@+id/txtnama"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/image"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:lines="2"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtkode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtnama"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/txtharga"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtkode"
+        android:layout_marginTop="5dp"
+
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/txtharga2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtharga"
+        android:layout_marginTop="5dp"
+
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/t7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtharga2"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:text="Stok :" />
+
+
+    <TextView
+        android:id="@+id/txtstok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtharga2"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+android:text="aw"
+        android:layout_toRightOf="@+id/t7"
+        android:textSize="12sp" />
+
+</RelativeLayout>

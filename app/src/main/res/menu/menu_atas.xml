@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/atur"
+        android:title="Pengaturan"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_setting"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/bantu"
+        android:title="Bantuan"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/out"
+        android:title="Logout"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+</menu>

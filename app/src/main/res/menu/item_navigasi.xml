@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/navigation1"
+            android:checked="false"
+            android:icon="@drawable/ic_beranda"
+            android:title="@string/beranda" />
+        <item
+            android:id="@+id/navigation2"
+            android:checked="false"
+            android:icon="@drawable/ic_daftar"
+            android:title="File Master"
+            app:actionLayout="@layout/notif"/>
+        <item
+            android:id="@+id/mnbrang"
+            android:checked="false"
+            android:visible="false"
+            android:textSize="2dp"
+
+            android:title="@string/barang" />
+        <item
+            android:id="@+id/mnsatuan"
+            android:checked="false"
+            android:visible="false"
+            android:title="@string/satuan" />
+
+        <item
+            android:id="@+id/mnkategori"
+            android:checked="false"
+            android:visible="false"
+            android:title="@string/kategori" />
+
+        <item
+            android:id="@+id/mnpelanggan"
+            android:checked="false"
+            android:visible="false"
+            android:title="@string/pelanggan" />
+        <item
+            android:id="@+id/mnsuplier"
+            android:checked="false"
+            android:visible="false"
+            android:title="Supplier" />
+        <item
+            android:id="@+id/mnsesuai"
+            android:checked="false"
+            android:visible="false"
+            android:title="@string/sesuai" />
+
+
+        <item
+            android:id="@+id/navigation3"
+            android:checked="false"
+            android:icon="@drawable/ic_transaksi"
+            android:title="@string/transaksi" />
+
+    </group>
+
+
+    <item
+        android:id="@+id/navigasi_kategori_2"
+        android:title="@string/pengaturan">
+        <menu>
+            <item
+                android:id="@+id/navigation4"
+                android:checked="false"
+                android:icon="@drawable/ic_setting"
+                android:title="@string/pengaturan" />
+            <item
+                android:id="@+id/navigation5"
+                android:checked="false"
+                android:icon="@drawable/ic_about"
+                android:title="@string/tentang" />
+
+        </menu>
+    </item>
+
+</menu>
