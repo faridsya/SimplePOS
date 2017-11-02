@@ -44,8 +44,8 @@
     <string name="stok">Stok</string>
     <string name="jumlah">Jumlah</string>
     <string name="alasan">Alasan</string>
-    <string name="ubah">Update</string>
-    <string name="hapus">Delete</string>
+    <string name="ubah">Ubah</string>
+    <string name="hapus">Hapus</string>
     <string name="belumlengkap">Data belum lengkap</string>
     <string name="yakin">Yakin?</string>
     <string name="sukses">Berhasil</string>

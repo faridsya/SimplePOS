@@ -421,12 +421,12 @@ public class inputbarang extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int item) {
                 boolean result=Utility.checkPermission(inputbarang.this);
 
-                if (items[item].equals(R.string.kamera)) {
+                if (items[item].equals(getString(R.string.kamera))) {
                     userChoosenTask =getString(R.string.kamera);
                     if(result)
                         cameraIntent();
 
-                } else if (items[item].equals(R.string.galeri)) {
+                } else if (items[item].equals(getString(R.string.galeri))) {
                     userChoosenTask =getString(R.string.galeri);
                     if(result)
                         galleryIntent();
