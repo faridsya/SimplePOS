@@ -63,7 +63,7 @@ public class inputSupplier extends AppCompatActivity {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 if(text1.getText().toString().matches("")||text2.getText().toString().matches("")){
-                    Toast.makeText(getApplicationContext(), "Data belum lengkap!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.belumlengkap, Toast.LENGTH_LONG).show();
                     return;
                 }
                 simpandata();

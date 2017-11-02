@@ -46,7 +46,7 @@
     <string name="alasan">Reason</string>
     <string name="ubah">Update</string>
     <string name="hapus">Delete</string>
-    <string name="belumlengkap">data is incomplete</string>
+    <string name="belumlengkap">Data is incomplete</string>
     <string name="yakin">Are you sure?</string>
     <string name="sukses">Successful</string>
     <string name="suksessimpan">Saved successfully</string>
