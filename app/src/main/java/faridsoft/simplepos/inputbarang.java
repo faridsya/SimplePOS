@@ -142,7 +142,7 @@ public class inputbarang extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 if(txtkode.getText().toString().matches("")||txtnama.getText().toString().matches("")||txtmodal.getText().toString().matches("")
                         ||txtjual1.getText().toString().matches("")||txtjual2.getText().toString().matches("")||kodekat.matches("")||kodestn.matches("")){
-                    Toast.makeText(getApplicationContext(), "Data belum lengkap!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.belumlengkap, Toast.LENGTH_LONG).show();
                     return;
                 }
                 simpandata();
