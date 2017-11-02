@@ -1,6 +1,7 @@
 package faridsoft.simplepos;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -23,19 +24,14 @@ public class inputPelanggan extends AppCompatActivity {
     public static inputPelanggan ma;
     TextView txtjudul;
     ImageView oto;
-
+    SharedPreferences sharedpreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_pelanggan);
-
-
-
         dbHelper = new DataHelper(this);
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -46,6 +42,7 @@ public class inputPelanggan extends AppCompatActivity {
             }
         });
         getSupportActionBar().setTitle(R.string.inputpelanggan);
+        sharedpreferences = getSharedPreferences("sesi", MODE_PRIVATE);
         oto = (ImageView) findViewById(R.id.oto);
         oto.setVisibility(View.VISIBLE);
         ton1 = (Button) findViewById(R.id.cmdsimpan);
@@ -106,20 +103,22 @@ public class inputPelanggan extends AppCompatActivity {
     }
 
     private String no_oto(){
-        int j,n;
+        int j,n,pjg;
         String No;
+        String kodebrg=sharedpreferences.getString("awalkodecus","cus");
+        pjg=kodebrg.length();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("Select c_idpelanggan from t_pelanggan where c_idpelanggan like 'cus%' order by c_idpelanggan desc", null);
-        if (result.getCount()==0) No="cus0001";
+        Cursor result = db.rawQuery("Select c_idpelanggan from t_pelanggan where c_idpelanggan like '"+ kodebrg + "%' order by c_idpelanggan desc", null);
+        if (result.getCount()==0) No=kodebrg+"0001";
         else{
             result.moveToFirst();
             String kode = result.getString(result.getColumnIndex("c_idpelanggan"));
-            String kode2 = kode.substring(3,7);
+            String kode2 = kode.substring(pjg,(pjg+4));
 
             j=Integer.valueOf(kode2);
             n=j+1;
             //No=kode2;
-            No="cus"+String.format("%04d", n);
+            No=kodebrg+String.format("%04d", n);
         }
 
         return No;
@@ -138,7 +137,7 @@ public class inputPelanggan extends AppCompatActivity {
                     text3.getText().toString() + "','" +
 
                     text4.getText().toString() + "',0)");
-            Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
 
             text1.setText("");text2.setText("");text3.setText("");text4.setText("");text1.requestFocus();
         }
@@ -150,7 +149,7 @@ public class inputPelanggan extends AppCompatActivity {
             }
             else {
                 db.execSQL("update t_pelanggan set c_pelanggan='"+text2.getText().toString()+"',c_alamat='"+text3.getText().toString()+"',c_telp='"+text4.getText().toString()+"' where c_idpelanggan='"+text1.getText().toString()+"'");
-                Toast.makeText(getApplicationContext(),R.string.sukses, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),R.string.suksesubah, Toast.LENGTH_LONG).show();
 
                 //text1.setEnabled(true);
 

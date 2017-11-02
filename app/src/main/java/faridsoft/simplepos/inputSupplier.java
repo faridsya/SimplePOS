@@ -1,6 +1,7 @@
 package faridsoft.simplepos;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -25,19 +26,14 @@ public class inputSupplier extends AppCompatActivity {
     public static inputSupplier ma;
     TextView txtjudul;
     ImageView oto;
-
+    SharedPreferences sharedpreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_supplier);
-
-
-
         dbHelper = new DataHelper(this);
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -48,6 +44,7 @@ public class inputSupplier extends AppCompatActivity {
             }
         });
         getSupportActionBar().setTitle("Input Supplier");
+        sharedpreferences = getSharedPreferences("sesi", MODE_PRIVATE);
         oto = (ImageView) findViewById(R.id.oto);
         oto.setVisibility(View.VISIBLE);
         ton1 = (Button) findViewById(R.id.cmdsimpan);
@@ -109,20 +106,22 @@ public class inputSupplier extends AppCompatActivity {
 
 
     private String no_oto(){
-        int j,n;
+        int j,n,pjg;
         String No;
+        String kodebrg=sharedpreferences.getString("awalkodesup","sup");
+        pjg=kodebrg.length();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("Select c_idsupplier from t_supplier where c_idsupplier like 'sup%' order by c_idsupplier desc", null);
-        if (result.getCount()==0) No="sup0001";
+        Cursor result = db.rawQuery("Select c_idsupplier from t_supplier where c_idsupplier like '"+ kodebrg + "%' order by c_idsupplier desc", null);
+        if (result.getCount()==0) No=kodebrg+"0001";
         else{
             result.moveToFirst();
             String kode = result.getString(result.getColumnIndex("c_idsupplier"));
-            String kode2 = kode.substring(3,7);
+            String kode2 = kode.substring(pjg,(pjg+4));
 
             j=Integer.valueOf(kode2);
             n=j+1;
             //No=kode2;
-            No="sup"+String.format("%04d", n);
+            No=kodebrg+String.format("%04d", n);
         }
 
         return No;
@@ -135,7 +134,7 @@ public class inputSupplier extends AppCompatActivity {
 
         if(!edit) {
             if (!cekvalidasi(text1.getText().toString(), text2.getText().toString())) {
-                Toast.makeText(getApplicationContext(), "Kode atau nama supplier sudah ada!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.duplikasikode, Toast.LENGTH_LONG).show();
                 return;
             }
             db.execSQL("insert into t_supplier values('" +
@@ -144,7 +143,7 @@ public class inputSupplier extends AppCompatActivity {
                     text3.getText().toString() + "','" +
 
                     text4.getText().toString() + "',0)");
-            Toast.makeText(getApplicationContext(), "Data berhasil disimpan!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
 
             text1.setText("");text2.setText("");text3.setText("");text4.setText("");text1.requestFocus();
         }
@@ -152,11 +151,11 @@ public class inputSupplier extends AppCompatActivity {
 
             Cursor result = db.rawQuery("select * from t_supplier where c_idsupplier!='"+text1.getText().toString()+"' and c_supplier='"+text2.getText().toString()+"'", null);
             if(result.getCount()>0) {
-                Toast.makeText(getApplicationContext(), "Nama supplier sudah ada!", Toast.LENGTH_LONG).show();return;
+                Toast.makeText(getApplicationContext(), R.string.duplikasinama, Toast.LENGTH_LONG).show();return;
             }
             else {
                 db.execSQL("update t_supplier set c_supplier='"+text2.getText().toString()+"',c_alamat='"+text3.getText().toString()+"',c_telp='"+text4.getText().toString()+"' where c_idsupplier='"+text1.getText().toString()+"'");
-                Toast.makeText(getApplicationContext(), "Data berhasil diubah!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.suksesubah, Toast.LENGTH_LONG).show();
 
                 //text1.setEnabled(true);
 

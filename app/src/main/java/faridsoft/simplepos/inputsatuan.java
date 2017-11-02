@@ -209,7 +209,7 @@ public class inputsatuan extends AppCompatActivity {
                     text1.getText().toString() + "','" +
 
                     text2.getText().toString() + "')");
-            Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
             datakategori("");
             text1.setText("");text2.setText("");text1.requestFocus();
         }
@@ -221,7 +221,7 @@ public class inputsatuan extends AppCompatActivity {
             }
             else {
                 db.execSQL("update t_satuan set c_satuan='"+text2.getText().toString()+"' where c_kodesatuan='"+text1.getText().toString()+"'");
-                Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.suksesubah, Toast.LENGTH_LONG).show();
                 edit=false;
                 text1.setEnabled(true);
                 datakategori("");

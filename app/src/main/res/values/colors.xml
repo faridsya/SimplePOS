@@ -6,6 +6,7 @@
     <color name="tabsScrollColor">#8a140e</color>
     <color name="blue">#00abea</color>
     <color name="white">#ffffff</color>
+    <color name="black">#212121</color>
     <color name="putihcard">#f9f5f5</color>
 
 </resources>

@@ -49,6 +49,8 @@
     <string name="belumlengkap">Data belum lengkap</string>
     <string name="yakin">Yakin?</string>
     <string name="sukses">Berhasil</string>
+    <string name="suksessimpan">Berhasil disimpan</string>
+    <string name="suksesubah">Berhasil diubah</string>
     <string name="galeri">Galeri</string>
     <string name="kamera">Kamera</string>
     <string name="duplikasikode">Duplikasi kode/id</string>
@@ -58,5 +60,7 @@
     <string name="carisupplier">Cari Supplier</string>
     <string name="caripelanggan">Cari Pelanggan</string>
     <string name="invalidhapus">Tak dapat dihapus,digunakan di tabel lain</string>
+    <string name="kodeawal">Kode Awal</string>
+    <string name="stokkurang">Pengurangan melebihi stok!!!</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

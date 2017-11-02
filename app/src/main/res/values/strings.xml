@@ -49,6 +49,8 @@
     <string name="belumlengkap">data is incomplete</string>
     <string name="yakin">Are you sure?</string>
     <string name="sukses">Successful</string>
+    <string name="suksessimpan">Saved successfully</string>
+    <string name="suksesubah">Changed successfully</string>
     <string name="kamera">Camera</string>
     <string name="galeri">Galerry</string>
     <string name="duplikasikode">Duplication id/name</string>
@@ -58,5 +60,7 @@
     <string name="carisupplier">Find Supplier</string>
     <string name="caripelanggan">Find Customer</string>
     <string name="invalidhapus">Cannot be deleted, used in other tables</string>
+    <string name="kodeawal">Initial Code</string>
+    <string name="stokkurang">Reduction exceeds stock!!!</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

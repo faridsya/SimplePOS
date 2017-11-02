@@ -94,7 +94,7 @@ public class inputsesuai extends AppCompatActivity {
                 Double jum=text.matches("")||text.matches("-") ? 0 : Double.parseDouble(text);
                 Double stokbaru=edit==true ? (stokskrg-jumsesuai+jum) :(stokskrg+jum);
                 if(stokbaru<0){
-                    Toast.makeText(getApplicationContext(), "Pengurangan melebihi stok!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.stokkurang, Toast.LENGTH_LONG).show();
                     txtjum.setText("");return;
                 }
                 String s=String.valueOf(stokbaru);

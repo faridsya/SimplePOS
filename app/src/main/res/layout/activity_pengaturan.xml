@@ -103,10 +103,122 @@
                         android:id="@+id/txtinfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Informasi penjualan"
+                        android:text="@string/kodeawal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
+                    <TextView
+                        android:id="@+id/t77"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/txtinfo"
+                        android:text="@string/barang"
+                        />
+                    <TextView
+                        android:id="@+id/t30"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/t77"
+                        android:layout_below="@+id/txtinfo"
 
+                        android:text=":"
+                        />
+                    <EditText
+                        android:id="@+id/txtbarang"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/t30"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/txtinfo" >
+                        </EditText>
+                    <TextView
+                        android:id="@+id/t74"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/t77"
+                        android:text="Supplier"
+                        />
+                    <TextView
+                        android:id="@+id/t31"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/t74"
+                        android:layout_below="@+id/t77"
+
+                        android:text=":"
+                        />
+
+                    <EditText
+                        android:id="@+id/txtsupplier"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+
+                        android:layout_toRightOf="@id/t30"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/t77" >
+                    </EditText>
+
+                    <TextView
+                        android:id="@+id/t75"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/t74"
+                        android:text="@string/pelanggan"/>
+                    <TextView
+                        android:id="@+id/t32"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/t75"
+                        android:layout_below="@+id/t74"
+
+                        android:text=":"
+                        />
+
+                    <EditText
+                        android:id="@+id/txtpelanggan"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+
+                        android:layout_toRightOf="@id/t30"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/t74" >
+                    </EditText>
+                    <Button
+                        android:id="@+id/cmdsimpan"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/simpan"
+                        android:layout_below="@+id/t75"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/buttonshape"
+                        android:shadowColor="#A8A8A8"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="5"
+
+
+                        />
 
                 </RelativeLayout>
 

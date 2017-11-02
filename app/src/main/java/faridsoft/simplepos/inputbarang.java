@@ -40,6 +40,7 @@ public class inputbarang extends AppCompatActivity {
     DataHelper dbHelper;
     ImageView gmbbrg,oto;
     public boolean edit;
+    SharedPreferences sharedpreferences;
     Button cmdkategori,cmdsatuan,cmdsup,cmdsimpan,cmddata,cmdbatal;
     private String userChoosenTask;
     private int REQUEST_CAMERA = 6, SELECT_FILE = 7;
@@ -53,6 +54,7 @@ public class inputbarang extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         edit=false;
         setSupportActionBar(toolbar);
+        sharedpreferences = getSharedPreferences("sesi", MODE_PRIVATE);
         barcode=(ImageView) findViewById(R.id.barcode);
         txtkode=(EditText) findViewById(R.id.txtkode);
         txtnama=(EditText) findViewById(R.id.txtnama);
@@ -202,6 +204,7 @@ public class inputbarang extends AppCompatActivity {
         txtmodal.setText(result.getString(result.getColumnIndex("c_hargabeli")));
         txtstokmin.setText(result.getString(result.getColumnIndex("c_stokmin")));
         filefoto=result.getString(result.getColumnIndex("c_gambar"));
+
         if(filefoto.equals("null")) {
 
             Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.simplepos);
@@ -279,20 +282,23 @@ public class inputbarang extends AppCompatActivity {
 
 
     private String no_oto(){
-        int j,n;
+        int j,n,pjg;
         String No;
+
+        String kodebrg=sharedpreferences.getString("awalkodebarang","brg");
+        pjg=kodebrg.length();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("Select c_kodebrg from t_barang where c_kodebrg like 'brg%' order by c_kodebrg desc", null);
-        if (result.getCount()==0) No="brg0001";
+        Cursor result = db.rawQuery("Select c_kodebrg from t_barang where c_kodebrg like '"+kodebrg+"%' order by c_kodebrg desc", null);
+        if (result.getCount()==0) No=kodebrg+"0001";
         else{
             result.moveToFirst();
             String kode = result.getString(result.getColumnIndex("c_kodebrg"));
-            String kode2 = kode.substring(3,7);
+            String kode2 = kode.substring(pjg,(pjg+4));
 
             j=Integer.valueOf(kode2);
             n=j+1;
         //No=kode2;
-            No="brg"+String.format("%04d", n);
+            No=kodebrg+String.format("%04d", n);
         }
 
        return No;
@@ -323,7 +329,7 @@ public class inputbarang extends AppCompatActivity {
                     txtstokmin.getText().toString() + "','" +
                     kodesup + "','" +
                     filefoto + "')");
-            Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
 
             kosong();
         }
@@ -337,7 +343,7 @@ public class inputbarang extends AppCompatActivity {
                 db.execSQL("update t_barang set c_deskripsi='"+txtnama.getText().toString()+"',c_kodekategori='"+kodekat+"',c_kodesatuan='"+kodestn+"'," +
                         "c_hargabeli='"+txtmodal.getText().toString()+"',c_hargajual1='"+txtjual1.getText().toString()+"',c_hargajual2='"+txtjual2.getText().toString()+"'" +
                         ",c_stokmin='"+txtstokmin.getText().toString()+"',c_idsupplier='"+kodesup+"',c_gambar='"+filefoto+"' where c_kodebrg='"+ txtkode.getText().toString()+"'");
-                Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.suksesubah, Toast.LENGTH_LONG).show();
                 kosong();
             }
 
