@@ -201,7 +201,7 @@ public void simpandata(){
                 text1.getText().toString() + "','" +
 
                 text2.getText().toString() + "')");
-        Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
         datakategori("");
         text1.setText("");text2.setText("");text1.requestFocus();
     }
@@ -213,7 +213,7 @@ public void simpandata(){
         }
         else {
             db.execSQL("update t_kategori set c_namakategori='"+text2.getText().toString()+"' where c_kode='"+text1.getText().toString()+"'");
-            Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.suksesubah, Toast.LENGTH_LONG).show();
             edit=false;
             text1.setEnabled(true);
             datakategori("");
