@@ -128,10 +128,6 @@ public class inputSupplier extends AppCompatActivity {
     }
     public void simpandata(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS t_supplier");
-        db.execSQL("create table t_supplier(c_idsupplier varchar(50) primary key, c_supplier varchar(100) not null,c_alamat varchar not null,c_telp varchar(50) not null,c_utang double(10,2) NOT NULL DEFAULT '0.00');");
-
-
         if(!edit) {
             if (!cekvalidasi(text1.getText().toString(), text2.getText().toString())) {
                 Toast.makeText(getApplicationContext(), R.string.duplikasikode, Toast.LENGTH_LONG).show();
