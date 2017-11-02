@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedpreferences = getSharedPreferences("sesi", Context.MODE_PRIVATE);
-
+        String language = sharedpreferences.getString("bahasa", "en");
+        fungsi2 g = new fungsi2();
+        g.changeLocale(this, language);
         dapatversi();
         progres();
 

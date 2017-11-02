@@ -112,7 +112,7 @@ public class Pengaturan extends AppCompatActivity {
 
     private void dapatselected(){
         String language = sharedpreferences.getString("bahasa", "en");
-     if( language.matches("en")||language.matches(""))  rb2.setChecked(true); else rb1.setChecked(true);
+        if( language.matches("en")||language.matches(""))  rb2.setChecked(true); else rb1.setChecked(true);
 }
     @Override
     public void onBackPressed() {
