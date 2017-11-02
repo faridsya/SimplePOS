@@ -47,7 +47,7 @@ public class caridata extends AppCompatActivity implements AbsListView.OnScrollL
                 onBackPressed();
             }
         });
-        getSupportActionBar().setTitle(R.string.cari);
+
         dbHelper = new DataHelper(this);
          footer = getLayoutInflater().inflate(R.layout.next, null);
         progressBar = (ProgressBar) footer.findViewById(R.id.progressBar);
@@ -58,14 +58,17 @@ public class caridata extends AppCompatActivity implements AbsListView.OnScrollL
         switch (value) {
             case "kategori":
                 datakategori("");
+                getSupportActionBar().setTitle(R.string.carikategori);
                 jenis=11;
                 break;
             case "satuan":
                 datasatuan("");
+                getSupportActionBar().setTitle(R.string.carisatuan);
                 jenis=12;
                 break;
             case "supplier":
                 datasupplier("");
+                getSupportActionBar().setTitle(R.string.carisupplier);
                 jenis=13;
                 break;
 

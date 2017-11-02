@@ -53,5 +53,10 @@
     <string name="kamera">Kamera</string>
     <string name="duplikasikode">Duplikasi kode/id</string>
     <string name="duplikasinama">Duplikasi nama</string>
+    <string name="carikategori">Cari Kategori</string>
+    <string name="carisatuan">Cari Satuan</string>
+    <string name="carisupplier">Cari Supplier</string>
+    <string name="caripelanggan">Cari Pelanggan</string>
+    <string name="invalidhapus">Tak dapat dihapus,digunakan di tabel lain</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

@@ -283,6 +283,11 @@ public void simpandata(){
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                             public void onClick(DialogInterface arg0, int arg1) {
+                                                fungsi2 f=new fungsi2();
+                                                if (f.hapuskategori(kodekat,getApplicationContext())) {
+                                                    f.pesan(getApplicationContext(),getString(R.string.invalidhapus));
+                                                    return;
+                                                }
                                                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                                                 db.execSQL("delete from t_kategori where c_kode = '"+kodekat+"'");
                                                 Toast.makeText(getApplicationContext(), R.string.sukses, Toast.LENGTH_LONG).show();

@@ -142,6 +142,12 @@ public class ListSatuan extends ArrayAdapter<String> {
                                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                                         public void onClick(DialogInterface arg0, int arg1) {
+
+                                                            fungsi2 f=new fungsi2();
+                                                            if (f.hapussatuan(kodekat,activity)) {
+                                                                f.pesan(activity,getContext().getString(R.string.invalidhapus));
+                                                                return;
+                                                            }
                                                             dbHelper = new DataHelper(activity);
                                                             SQLiteDatabase db = dbHelper.getWritableDatabase();
                                                             db.execSQL("delete from t_satuan where c_kodesatuan = '"+kodekat+"'");

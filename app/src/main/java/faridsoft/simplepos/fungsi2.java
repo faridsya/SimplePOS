@@ -5,12 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,8 +84,29 @@ public ProgressDialog spinner;
 
     }
 
-    public boolean hapussatuan(){
-        return true;
+    public boolean hapussatuan(String kode,Context context){
+        boolean benar;
+        DataHelper dbHelper;
+        dbHelper = new DataHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor result = db.rawQuery("select * from t_barang  where c_kodesatuan='"+ kode +"'", null);
+       benar=(result.getCount()>0 )?   true :  false;
+        return benar;
+    }
+    public boolean hapuskategori(String kode,Context context){
+        boolean benar;
+        DataHelper dbHelper;
+        dbHelper = new DataHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor result = db.rawQuery("select * from t_barang  where c_kodekategori='"+ kode +"'", null);
+        benar=(result.getCount()>0 )?   true :  false;
+        return benar;
+    }
+    public void pesan(Context context,String pesan){
+        Toast.makeText(context, pesan, Toast.LENGTH_LONG).show();
+
     }
 
 }

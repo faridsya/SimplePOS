@@ -51,7 +51,12 @@
     <string name="sukses">Successful</string>
     <string name="kamera">Camera</string>
     <string name="galeri">Galerry</string>
-    <string name="duplikasikode">Duplication id</string>
+    <string name="duplikasikode">Duplication id/name</string>
     <string name="duplikasinama">Duplication name</string>
+    <string name="carikategori">Find Category</string>
+    <string name="carisatuan">Find unit</string>
+    <string name="carisupplier">Find Supplier</string>
+    <string name="caripelanggan">Find Customer</string>
+    <string name="invalidhapus">Cannot be deleted, used in other tables</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>
