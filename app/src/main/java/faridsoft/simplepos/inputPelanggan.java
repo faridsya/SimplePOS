@@ -103,7 +103,6 @@ public class inputPelanggan extends AppCompatActivity {
     }
 
     private String no_oto(){
-        
         int j,n,pjg;
         String No;
         String kodebrg=sharedpreferences.getString("awalkodecus","cus");
