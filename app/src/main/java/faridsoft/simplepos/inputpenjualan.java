@@ -3,6 +3,7 @@ package faridsoft.simplepos;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,11 +34,11 @@ import java.util.Locale;
 
 public class inputpenjualan extends AppCompatActivity {
     DataHelper dbHelper;
-    Button ton1, ton2;
+    Button cmdcus, ton2;
     boolean edit;
     EditText txtkode, text2,txtcari;
     private ListView listView;
-    private String userChoosenTask;
+    private String idpelanggan;
     private ArrayAdapter<String> adapter;
     TextView txtjudul;
     RelativeLayout kotak;
@@ -74,6 +75,7 @@ public class inputpenjualan extends AppCompatActivity {
         panah2=(ImageView) findViewById(R.id.panah2);
         panah.setVisibility(View.VISIBLE);
         cmdtgl = (Button) findViewById(R.id.cmdtgl);
+        cmdcus = (Button) findViewById(R.id.cmdcus);
         Calendar c = Calendar.getInstance();
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         tanggal = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
@@ -112,6 +114,15 @@ public class inputpenjualan extends AppCompatActivity {
                 if (edit) return;
                 txtkode.setText(no_oto());
 
+            }
+        });
+        cmdcus.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(inputpenjualan.this, caridata.class);
+                intent.putExtra("pilihan", "pelanggan");
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -313,6 +324,16 @@ public class inputpenjualan extends AppCompatActivity {
         return animator;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==44){
+            String value = (String) data.getExtras().getString("kodekat");
+            String value2 = (String) data.getExtras().getString("namakat");
+            idpelanggan=value;
+            cmdcus.setText(value2);
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
