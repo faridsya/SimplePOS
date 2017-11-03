@@ -175,7 +175,6 @@ public class inputpenjualan extends AppCompatActivity {
         int j,n;
         String No;
         No="trx"+ tanggalindo.substring(8,10)+tanggalindo.substring(3,5)+tanggalindo.substring(0,2);
-
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor result = db.rawQuery("Select c_idpenjualan from t_penjualan where c_idpenjualan like '"+ No + "%' order by c_idpenjualan desc", null);
         if (result.getCount()==0) No=No+"001";
