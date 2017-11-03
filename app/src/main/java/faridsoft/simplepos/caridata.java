@@ -72,7 +72,7 @@ public class caridata extends AppCompatActivity implements AbsListView.OnScrollL
                 jenis=13;
                 break;
             case "pelanggan":
-                datasupplier("");
+                datapelanggan("");
                 getSupportActionBar().setTitle(R.string.caripelanggan);
                 jenis=44;
                 break;
@@ -181,16 +181,16 @@ public class caridata extends AppCompatActivity implements AbsListView.OnScrollL
     public void datapelanggan(String nama) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor result = db.rawQuery("select * from t_pelanggan where c_supplier like '%"+nama+"%' order by c_supplier", null);
+        Cursor result = db.rawQuery("select * from t_pelanggan where c_pelanggan like '%"+nama+"%' order by c_pelanggan", null);
 
         daftar = new String[result.getCount()];
         arraylist.clear();
         int i=0;
         while(result.moveToNext()){
 
-            daftar[i]=result.getString(result.getColumnIndex("c_idsupplier"));
+            daftar[i]=result.getString(result.getColumnIndex("c_idpelanggan"));
 
-            datasupplier wp = new datasupplier(result.getString(result.getColumnIndex("c_idsupplier")), result.getString(result.getColumnIndex("c_supplier")),
+            datasupplier wp = new datasupplier(result.getString(result.getColumnIndex("c_idpelanggan")), result.getString(result.getColumnIndex("c_pelanggan")),
                     result.getString(result.getColumnIndex("c_alamat")), result.getString(result.getColumnIndex("c_telp")));
             // Binds all strings into an array
             arraylist.add(wp);
