@@ -177,13 +177,12 @@ public class caridata extends AppCompatActivity implements AbsListView.OnScrollL
 
     }
 
+
     public void datapelanggan(String nama) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor result = db.rawQuery("select * from t_pelanggan where c_supplier like '%"+nama+"%' order by c_supplier", null);
-        //Toast.makeText(getApplicationContext(), "aw", Toast.LENGTH_LONG).show();
-        //return;
-        // result.getCount();
+
         daftar = new String[result.getCount()];
         arraylist.clear();
         int i=0;
