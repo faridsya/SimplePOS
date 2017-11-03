@@ -2,6 +2,7 @@ package faridsoft.simplepos;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,13 +26,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class inputpenjualan extends AppCompatActivity {
     DataHelper dbHelper;
     Button ton1, ton2;
     boolean edit;
-    EditText text1, text2,txtcari;
+    EditText txtkode, text2,txtcari;
     private ListView listView;
     private String userChoosenTask;
     private ArrayAdapter<String> adapter;
@@ -41,6 +46,10 @@ public class inputpenjualan extends AppCompatActivity {
     String[] daftar;
     ValueAnimator mAnimator;
     ImageView oto;
+    Button cmdtgl;
+    private DatePickerDialog datePickerDialog;
+    private SimpleDateFormat dateFormatter,tanggal;
+    private String tanggalsesuai,tanggalindo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +67,26 @@ public class inputpenjualan extends AppCompatActivity {
             }
         });
         getSupportActionBar().setTitle("");
+        oto = (ImageView) findViewById(R.id.oto);
+        txtkode = (EditText) findViewById(R.id.txtkode);
         kotak = (RelativeLayout) findViewById(R.id.kotaksimpan);
         panah=(ImageView) findViewById(R.id.panah);
         panah2=(ImageView) findViewById(R.id.panah2);
         panah.setVisibility(View.VISIBLE);
+        cmdtgl = (Button) findViewById(R.id.cmdtgl);
+        Calendar c = Calendar.getInstance();
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        tanggal = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        tanggalsesuai = tanggal.format(c.getTime());
+        tanggalindo=dateFormatter.format(c.getTime());
+        cmdtgl.setText(tanggalindo);
 
+        cmdtgl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateDialog();
+            }
+        });
         panah.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -79,6 +103,15 @@ public class inputpenjualan extends AppCompatActivity {
                 panah2.setVisibility(View.GONE);panah.setVisibility(View.VISIBLE);
                 //kotak.setVisibility(View.VISIBLE);
                 buka();
+            }
+        });
+        oto.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                if (edit) return;
+                txtkode.setText(no_oto());
+
             }
         });
 
@@ -107,21 +140,54 @@ public class inputpenjualan extends AppCompatActivity {
 
     }
 
+    private void showDateDialog(){
+        Calendar newCalendar = Calendar.getInstance();
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                /**
+                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
+                 */
+
+                /**
+                 * Set Calendar untuk menampung tanggal yang dipilih
+                 */
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+
+                /**
+                 * Update TextView dengan tanggal yang kita pilih
+                 */tanggalindo=dateFormatter.format(newDate.getTime());
+                cmdtgl.setText(tanggalindo);
+                tanggalsesuai=tanggal.format(newDate.getTime());
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        /**
+         * Tampilkan DatePicker dialog
+         */
+        datePickerDialog.show();
+    }
     private String no_oto(){
         int j,n;
         String No;
+        No="trx"+ tanggalindo.substring(8,10)+tanggalindo.substring(3,5)+tanggalindo.substring(0,2);
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("Select c_kodesatuan from t_satuan where c_kodesatuan like 'sat%' order by c_kodesatuan desc", null);
-        if (result.getCount()==0) No="sat0001";
+        Cursor result = db.rawQuery("Select c_idpenjualan from t_penjualan where c_idpenjualan like '"+ No + "%' order by c_idpenjualan desc", null);
+        if (result.getCount()==0) No=No+"001";
         else{
             result.moveToFirst();
-            String kode = result.getString(result.getColumnIndex("c_kodesatuan"));
-            String kode2 = kode.substring(3,7);
+            String kode = result.getString(result.getColumnIndex("c_idpenjualan"));
+            String kode2 = kode.substring(8,11);
 
             j=Integer.valueOf(kode2);
             n=j+1;
             //No=kode2;
-            No="sat"+String.format("%04d", n);
+            No=No+String.format("%03d", n);
         }
 
         return No;
@@ -130,31 +196,31 @@ public class inputpenjualan extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         if(!edit) {
-            if (!cekvalidasi(text1.getText().toString(), text2.getText().toString())) {
+            if (!cekvalidasi(txtkode.getText().toString(), text2.getText().toString())) {
                 Toast.makeText(getApplicationContext(), R.string.duplikasikode, Toast.LENGTH_LONG).show();
                 return;
             }
             db.execSQL("insert into t_satuan values('" +
-                    text1.getText().toString() + "','" +
+                    txtkode.getText().toString() + "','" +
 
                     text2.getText().toString() + "')");
             Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
             datakategori("");
-            text1.setText("");text2.setText("");text1.requestFocus();
+            txtkode.setText("");text2.setText("");txtkode.requestFocus();
         }
         else {
 
-            Cursor result = db.rawQuery("select * from t_satuan where c_kodesatuan!='"+text1.getText().toString()+"' and c_satuan='"+text2.getText().toString()+"'", null);
+            Cursor result = db.rawQuery("select * from t_satuan where c_kodesatuan!='"+txtkode.getText().toString()+"' and c_satuan='"+text2.getText().toString()+"'", null);
             if(result.getCount()>0) {
                 Toast.makeText(getApplicationContext(), R.string.duplikasinama, Toast.LENGTH_LONG).show();return;
             }
             else {
-                db.execSQL("update t_satuan set c_satuan='"+text2.getText().toString()+"' where c_kodesatuan='"+text1.getText().toString()+"'");
+                db.execSQL("update t_satuan set c_satuan='"+text2.getText().toString()+"' where c_kodesatuan='"+txtkode.getText().toString()+"'");
                 Toast.makeText(getApplicationContext(), R.string.suksesubah, Toast.LENGTH_LONG).show();
                 edit=false;
-                text1.setEnabled(true);
+                txtkode.setEnabled(true);
                 datakategori("");
-                text1.setText("");text2.setText("");text1.requestFocus();
+                txtkode.setText("");text2.setText("");txtkode.requestFocus();
             }
 
 
