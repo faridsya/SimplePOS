@@ -54,6 +54,11 @@
             android:checked="false"
             android:icon="@drawable/ic_transaksi"
             android:title="@string/transaksi" />
+        <item
+            android:id="@+id/mnpenjualan"
+            android:checked="false"
+            android:visible="true"
+            android:title="@string/penjualan" />
 
     </group>
 

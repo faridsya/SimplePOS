@@ -248,7 +248,7 @@
             android:background="@drawable/cmdcoklat"
             android:layout_below="@+id/txtstokmin"
             android:text="@string/pilih"
-            android:onClick="pilihsup"
+
             />
 
                 <TextView

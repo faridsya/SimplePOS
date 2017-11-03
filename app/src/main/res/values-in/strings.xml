@@ -28,7 +28,7 @@
     <string name="pelanggan">Pelanggan</string>
     <string name="sesuai">Penyesuaian stok</string>
     <string name="barang">Barang</string>
-    <string name="transaksi">Transaction</string>
+    <string name="transaksi">Transaksi</string>
     <string name="inputkategori">Input Kategori</string>
     <string name="kodekategori">Kode kategori</string>
     <string name="namakategori">Nama kategori</string>
@@ -62,5 +62,7 @@
     <string name="invalidhapus">Tak dapat dihapus,digunakan di tabel lain</string>
     <string name="kodeawal">Kode Awal</string>
     <string name="stokkurang">Pengurangan melebihi stok!!!</string>
+    <string name="kodepenjualan">Id penjualan</string>
+    <string name="penjualan">Penjualan</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

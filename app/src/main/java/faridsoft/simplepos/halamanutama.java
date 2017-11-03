@@ -236,7 +236,10 @@ public class halamanutama extends AppCompatActivity {
                         startActivity(new Intent(halamanutama.this, inputsesuai.class));
                         drawerLayout.closeDrawers();
                         return true;
-
+                    case R.id.mnpenjualan:
+                        startActivity(new Intent(halamanutama.this, inputpenjualan.class));
+                        drawerLayout.closeDrawers();
+                        return true;
                     case R.id.mnsatuan:
                         startActivity(new Intent(halamanutama.this, inputsatuan.class));
                         drawerLayout.closeDrawers();

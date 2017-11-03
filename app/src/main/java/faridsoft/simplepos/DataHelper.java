@@ -52,6 +52,12 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS t_sesuai");
         db.execSQL("create table t_sesuai(`id` INTEGER PRIMARY KEY  AUTOINCREMENT, c_tanggal date not null,c_kodebrg varchar(50) not null,`c_jumlah` double(10,2) NOT NULL,c_alasan);");
 
+        db.execSQL("DROP TABLE IF EXISTS t_penjualan");
+        db.execSQL("create table t_penjualan(c_idpenjualan varchar(50) primary key, c_tanggal date not null,c_idpelanggan varchar(50) ,`c_jumlah` double(10,2) NOT NULL DEFAULT '0.00',`c_ppn` double(10,2) NOT NULL DEFAULT '0.00',`c_diskon` double(10,2) NOT NULL DEFAULT '0.00',`c_total` double(10,2) NOT NULL DEFAULT '0.00',`c_cash` double(10,2) NOT NULL DEFAULT '0.00',c_hari smallint,c_user varchar(50))");
+
+        db.execSQL("DROP TABLE IF EXISTS t_penjualandetil");
+        db.execSQL("create table t_penjualandetil(c_idpenjualan varchar(50), c_kodebrg varchar(50),`c_jumlahbrg` double(6,2) NOT NULL DEFAULT '0.00',`c_hargabeli` double(10,2) NOT NULL DEFAULT '0.00',`c_hargajual` double(10,2) NOT NULL DEFAULT '0.00',primary key(c_idpenjualan,c_kodebrg))");
+
         db.execSQL("CREATE TRIGGER if not exists tsesuai_ai   \n" +
                 "   AFTER INSERT  \n" +
                 " ON[t_sesuai]  \n" +

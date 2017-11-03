@@ -62,5 +62,7 @@
     <string name="invalidhapus">Cannot be deleted, used in other tables</string>
     <string name="kodeawal">Initial Code</string>
     <string name="stokkurang">Reduction exceeds stock!!!</string>
+    <string name="kodepenjualan">Sales id</string>
+    <string name="penjualan">Sales</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

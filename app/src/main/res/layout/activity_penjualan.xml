@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".inputKategori" >
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_penjualan" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        >
+        <TextView
+            android:id="@+id/txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/penjualan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/kotaksimpan"
+            android:layout_below="@+id/txt2"
+
+            >
+            <TextView
+                android:id="@+id/txtinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kodeawal"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            <TextView
+                android:id="@+id/t77"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/txtinfo"
+                android:text="@string/kodepenjualan"
+                />
+            <TextView
+                android:id="@+id/t36"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/t77"
+                android:layout_below="@+id/txtinfo"
+
+                android:text=":"
+                />
+            <EditText
+                android:id="@+id/txtkode"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toRightOf="@id/t36"
+                android:textColor="@color/black"
+                android:layout_below="@+id/txtinfo" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/txttgl"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/tanggal"
+                android:layout_below="@+id/t77"
+                />
+            <TextView
+                android:id="@+id/t300"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/txttgl"
+                android:layout_below="@+id/t77"
+                android:text=":"
+                />
+            />
+            <Button
+                android:id="@+id/cmdtgl"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/t300"
+                android:layout_below="@+id/t77"
+                android:background="@drawable/cmdcoklat"
+
+                android:text="@string/pilih"
+
+                />
+
+            <TextView
+                android:id="@+id/textView2"
+
+                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_below="@+id/txttgl"
+                android:layout_marginTop="10dp"
+                android:text="@string/pelanggan" />
+
+            <TextView
+                android:id="@+id/t30"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/textView2"
+                android:layout_below="@+id/txttgl"
+
+                android:text=":"
+                />
+
+            <Button
+                android:id="@+id/cmdsup"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/t30"
+
+                android:background="@drawable/cmdcoklat"
+                android:layout_below="@+id/txttgl"
+                android:text="@string/pilih"
+
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/kotakbarang"
+
+            />
+        <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+
+            android:layout_below="@+id/kotaksimpan">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="15dp"
+                >
+            <ListView
+                android:id="@+id/list_satuan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                />
+            </FrameLayout>
+        </ScrollView>
+        </RelativeLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:id="@+id/kotaktotal"
+            android:layout_marginTop="20dp"
+          >
+
+            <TextView
+                android:id="@+id/txtttl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="false"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
+                android:gravity="left"
+                android:text="TOTAL  :" />
+
+            <TextView
+                android:id="@+id/ttotal"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/txtttl"
+                android:text="@string/tanggal"
+                android:gravity="right"
+                android:textColor="@color/white"
+
+                />
+
+        </RelativeLayout>
+</RelativeLayout>
