@@ -127,7 +127,7 @@
                 />
 
             <Button
-                android:id="@+id/cmdsup"
+                android:id="@+id/cmdcus"
                 android:layout_width="150dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="10dp"

@@ -64,5 +64,6 @@
     <string name="stokkurang">Reduction exceeds stock!!!</string>
     <string name="kodepenjualan">Sales id</string>
     <string name="penjualan">Sales</string>
+    <string name="harga">Price</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

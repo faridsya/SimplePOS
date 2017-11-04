@@ -43,7 +43,7 @@ public class inputpenjualan extends AppCompatActivity {
     TextView txtjudul;
     RelativeLayout kotak;
     SharedPreferences sharedpreferences;
-    ImageView panah,panah2;
+    ImageView panah,panah2,cmdcari;
     String[] daftar;
     ValueAnimator mAnimator;
     ImageView oto;
@@ -57,7 +57,7 @@ public class inputpenjualan extends AppCompatActivity {
         setContentView(R.layout.activity_penjualan);
 
         dbHelper = new DataHelper(this);
-        datakategori("");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -68,6 +68,7 @@ public class inputpenjualan extends AppCompatActivity {
             }
         });
         getSupportActionBar().setTitle("");
+        cmdcari=(ImageView) findViewById(R.id.cari);
         oto = (ImageView) findViewById(R.id.oto);
         txtkode = (EditText) findViewById(R.id.txtkode);
         kotak = (RelativeLayout) findViewById(R.id.kotaksimpan);
@@ -147,6 +148,15 @@ public class inputpenjualan extends AppCompatActivity {
                         return true;
                     }
                 });
+        cmdcari.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(inputpenjualan.this, Datacaribarang.class);
+                intent.putExtra("form", "penjualan");
+                startActivityForResult(intent, 1);
+            }
+        });
 
 
     }
@@ -215,7 +225,7 @@ public class inputpenjualan extends AppCompatActivity {
 
                     text2.getText().toString() + "')");
             Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
-            datakategori("");
+
             txtkode.setText("");text2.setText("");txtkode.requestFocus();
         }
         else {
@@ -229,32 +239,24 @@ public class inputpenjualan extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.suksesubah, Toast.LENGTH_LONG).show();
                 edit=false;
                 txtkode.setEnabled(true);
-                datakategori("");
+
                 txtkode.setText("");text2.setText("");txtkode.requestFocus();
             }
 
 
         }
     }
-    public void datakategori(String nama) {
+    public void isibarang() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ArrayList<String> datakode = new ArrayList<>();
         ArrayList<String> datanama = new ArrayList<>();
-        Cursor result = db.rawQuery("select * from t_satuan where c_satuan like '%"+nama+"%'"+" order by c_satuan", null);
         //Toast.makeText(getApplicationContext(), "aw", Toast.LENGTH_LONG).show();
         //return;
         // result.getCount();
-        daftar = new String[result.getCount()];
-
-        int i=0;
-        while(result.moveToNext()){
-            datakode.add(result.getString(result.getColumnIndex("c_kodesatuan")));
-            datanama.add(result.getString(result.getColumnIndex("c_satuan")));
-            daftar[i]=result.getString(result.getColumnIndex("c_kodesatuan"));
+        //daftar = new String[result.getCount()];
 
 
-            i++;
-        }
+
 
         listView = (ListView) findViewById(R.id.list_satuan);
         adapter = new ListSatuan(this,R.layout.datasatuan,datakode,datanama);
@@ -332,6 +334,13 @@ public class inputpenjualan extends AppCompatActivity {
             String value2 = (String) data.getExtras().getString("namakat");
             idpelanggan=value;
             cmdcus.setText(value2);
+        }
+        else if(resultCode==22){
+
+            String value = (String) data.getExtras().getString("kode", "");
+            String value2 = (String) data.getExtras().getString("nama", "");
+            String value3 = (String) data.getExtras().getString("stok", "");
+            Toast.makeText(getApplicationContext(), value2, Toast.LENGTH_LONG).show();
         }
     }
     @Override

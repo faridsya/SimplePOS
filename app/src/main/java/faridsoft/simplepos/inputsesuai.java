@@ -122,6 +122,7 @@ public class inputsesuai extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(inputsesuai.this, Datacaribarang.class);
+                intent.putExtra("form", "sesuai");
                 startActivityForResult(intent, 1);
             }
         });

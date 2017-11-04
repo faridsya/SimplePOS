@@ -19,6 +19,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -31,6 +33,10 @@ public class Datacaribarang extends AppCompatActivity {
     Bitmap bitmap;
     EditText editsearch;
     ImageView barcode;
+    String form;
+    TextView txtkode,txtnama,txtstok;
+    String kodekat,namakat,stok;
+    private int jenis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +60,8 @@ public class Datacaribarang extends AppCompatActivity {
         barcode=(ImageView) findViewById(R.id.barcode);
         barcode.setVisibility(View.VISIBLE);
 
+
+        form = getIntent().getExtras().getString("form");
         gridView.setOnItemClickListener(new klikbarang());
 
 
@@ -101,24 +109,47 @@ public class Datacaribarang extends AppCompatActivity {
             //final String namakat = daftar2[position]; //.getItemAtPosition(arg2).toString();
 
 
-            TextView txtkode = (TextView) view.findViewById(R.id.txtkode);
-            TextView txtnama = (TextView) view.findViewById(R.id.txtnama);
-            TextView txtstok = (TextView) view.findViewById(R.id.txtstok);
+           txtkode = (TextView) view.findViewById(R.id.txtkode);
+            txtnama = (TextView) view.findViewById(R.id.txtnama);
+             txtstok = (TextView) view.findViewById(R.id.txtstok);
 
-            String kodekat = txtkode.getText().toString();
-            String namakat = txtnama.getText().toString();
-            String stok = txtstok.getText().toString();
+            kodekat = txtkode.getText().toString();
+             namakat = txtnama.getText().toString();
+             stok = txtstok.getText().toString();
             //Toast.makeText(getApplicationContext(), str + " is pressed " + position, Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(getApplicationContext(), inputsesuai.class);
-            intent.putExtra("kode", kodekat);
-            intent.putExtra("nama", namakat);
-            intent.putExtra("stok", stok);
-            setResult(22, intent);
-            finish();
+
+            form = getIntent().getExtras().getString("form");
+
+            switch (form) {
+                case "sesuai":
+                    bukasesuai();
+                    break;
+                case "penjualan":
+                    bukapenjualan();
+                    break;
+            }
+
             //Toast.makeText(getApplicationContext(),kodekat, Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private void bukasesuai(){
+        Intent intent = new Intent(getApplicationContext(), inputsesuai.class);
+        intent.putExtra("kode", kodekat);
+        intent.putExtra("nama", namakat);
+        intent.putExtra("stok", stok);
+        setResult(22, intent);
+        finish();
+    }
+    private void bukapenjualan(){
+        Intent intent = new Intent(getApplicationContext(), inputpenjualan.class);
+        intent.putExtra("kode", kodekat);
+        intent.putExtra("nama", namakat);
+        intent.putExtra("stok", stok);
+        setResult(22, intent);
+        finish();
     }
     private ArrayList<itemcaribarang> getData() {
 

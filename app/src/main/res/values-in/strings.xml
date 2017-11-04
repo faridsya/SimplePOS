@@ -64,5 +64,6 @@
     <string name="stokkurang">Pengurangan melebihi stok!!!</string>
     <string name="kodepenjualan">Id penjualan</string>
     <string name="penjualan">Penjualan</string>
+    <string name="harga">Price</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

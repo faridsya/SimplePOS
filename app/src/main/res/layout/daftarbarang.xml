@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_weight="15"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/txtnama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_view"
+        android:paddingLeft="10dp"
+        android:text="lolol"
+        android:textColor="@color/colorAccent"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtkode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_view"
+        android:paddingLeft="10dp"
+        android:visibility="gone"
+        android:layout_below="@id/txtnama"
+        android:text="ol"
+        android:textStyle="bold"
+        android:textSize="10dp"/>
+    <TextView
+        android:id="@+id/txtjum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_view"
+        android:paddingLeft="10dp"
+
+        android:layout_below="@id/txtnama"
+        android:text="5"
+        android:textStyle="bold"
+        android:textSize="10dp"/>
+
+    <TextView
+        android:id="@+id/txttotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtnama"
+        android:layout_toLeftOf="@id/image_view2"
+        android:gravity="right"
+        android:paddingLeft="10dp"
+        android:text="ttlllllllllllllllll"
+        android:textColor="@color/blue"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/image_view2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_weight="10"
+        android:src="@drawable/ic_menu"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name" />
+
+</RelativeLayout >
