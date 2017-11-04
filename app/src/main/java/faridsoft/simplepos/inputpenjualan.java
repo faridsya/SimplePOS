@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -363,11 +364,19 @@ public class inputpenjualan extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
 
-                Double ttl=  NumberFormat.getInstance(Locale.getDefault()).parse("25.46").doubleValue()* Double.parseDouble(txtharga.getText().toString());
+                Double ttl= null;Double vharga=null;Double vjum=null;
+                try {
+                    ttl = NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue()* NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
+                    vharga =  NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
+                    vjum =  NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue();
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 daftarkode.add(kode);
                 daftarnama.add(nama);
-                daftarjumlah.add(Double.parseDouble(txtjum.getText().toString()));
-                daftarharga.add(Double.parseDouble(txtharga.getText().toString()));
+                daftarjumlah.add(vjum);
+                daftarharga.add(vharga);
                 daftartotal.add(ttl);
 
                 itemdaftarbarang wp = new  itemdaftarbarang (kode, nama,txtjum.getText().toString() + " x " + txtharga.getText().toString(),String.valueOf(ttl));
