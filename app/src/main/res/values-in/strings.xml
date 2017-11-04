@@ -65,5 +65,9 @@
     <string name="kodepenjualan">Id penjualan</string>
     <string name="penjualan">Penjualan</string>
     <string name="harga">Harga</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="harga1">Harga1\u0009:\u00A0</string>
+    <string name="harga2">Harga2\u0009:\u00A0</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

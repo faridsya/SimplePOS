@@ -4,7 +4,8 @@ import android.widget.ImageView;
 
 public class itemdaftarbarang {
     int ids;
-    private String kodebrg,total,namabrg,jum;
+    private String kodebrg,namabrg,jum;
+    private String total;
     private ImageView imageView;
 
 

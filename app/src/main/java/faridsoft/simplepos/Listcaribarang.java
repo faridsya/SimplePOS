@@ -90,8 +90,8 @@ public class Listcaribarang extends BaseAdapter {
         holder.deskripsi.setText(item.getNama());
         holder.image.setImageBitmap(item.getImage());
         holder.stok.setText(item.getstok());
-        holder.harga.setText("Harga1\u0009: "+item.getharga());
-        holder.harga2.setText("Harga2\u0009: "+item.getharga2());
+        holder.harga.setText(item.getharga());
+        holder.harga2.setText(item.getharga2());
 
 
         return view;

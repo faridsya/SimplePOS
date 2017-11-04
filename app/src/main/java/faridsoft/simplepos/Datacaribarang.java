@@ -34,8 +34,8 @@ public class Datacaribarang extends AppCompatActivity {
     EditText editsearch;
     ImageView barcode;
     String form;
-    TextView txtkode,txtnama,txtstok;
-    String kodekat,namakat,stok;
+    TextView txtkode,txtnama,txtstok,txtharga,txtharga2;
+    String kodekat,namakat,stok,harga,harga2;
     private int jenis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,10 +112,13 @@ public class Datacaribarang extends AppCompatActivity {
            txtkode = (TextView) view.findViewById(R.id.txtkode);
             txtnama = (TextView) view.findViewById(R.id.txtnama);
              txtstok = (TextView) view.findViewById(R.id.txtstok);
-
+            txtharga= (TextView) view.findViewById(R.id.txtharga);
+            txtharga2= (TextView) view.findViewById(R.id.txtharga2);
             kodekat = txtkode.getText().toString();
              namakat = txtnama.getText().toString();
              stok = txtstok.getText().toString();
+             harga=txtharga.getText().toString();
+            harga2=txtharga2.getText().toString();
             //Toast.makeText(getApplicationContext(), str + " is pressed " + position, Toast.LENGTH_SHORT).show();
 
 
@@ -148,6 +151,8 @@ public class Datacaribarang extends AppCompatActivity {
         intent.putExtra("kode", kodekat);
         intent.putExtra("nama", namakat);
         intent.putExtra("stok", stok);
+        intent.putExtra("harga", harga);
+        intent.putExtra("harga2", harga2);
         setResult(22, intent);
         finish();
     }

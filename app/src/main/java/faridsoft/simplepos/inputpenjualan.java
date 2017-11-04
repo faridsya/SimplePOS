@@ -30,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +43,7 @@ public class inputpenjualan extends AppCompatActivity {
     EditText txtkode, text2,txtcari;
     private ListView listView;
     private String idpelanggan;
-    private ArrayAdapter<String> adapter;
+    Listdaftarbarang adapter;
     TextView txtjudul;
     RelativeLayout kotak;
     SharedPreferences sharedpreferences;
@@ -54,6 +55,12 @@ public class inputpenjualan extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter,tanggal;
     private String tanggalsesuai,tanggalindo;
+    ArrayList<String> daftarkode = new ArrayList<>();
+    ArrayList<String> daftarnama = new ArrayList<>();
+    ArrayList<Double> daftarjumlah = new ArrayList<>();
+    ArrayList<Double> daftarharga = new ArrayList<>();
+    ArrayList<Double> daftartotal = new ArrayList<>();
+    ArrayList<itemdaftarbarang> arraylist = new ArrayList<itemdaftarbarang>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +93,7 @@ public class inputpenjualan extends AppCompatActivity {
         tanggalsesuai = tanggal.format(c.getTime());
         tanggalindo=dateFormatter.format(c.getTime());
         cmdtgl.setText(tanggalindo);
-
+        arraylist.clear();
         cmdtgl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +127,7 @@ public class inputpenjualan extends AppCompatActivity {
 
             }
         });
+
         cmdcus.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -250,22 +258,9 @@ public class inputpenjualan extends AppCompatActivity {
         }
     }
     public void isibarang() {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        ArrayList<String> datakode = new ArrayList<>();
-        ArrayList<String> datanama = new ArrayList<>();
-        //Toast.makeText(getApplicationContext(), "aw", Toast.LENGTH_LONG).show();
-        //return;
-        // result.getCount();
-        //daftar = new String[result.getCount()];
 
 
 
-
-        listView = (ListView) findViewById(R.id.list_satuan);
-        adapter = new ListSatuan(this,R.layout.datasatuan,datakode,datanama);
-        listView.setAdapter(adapter);
-        listView.setSelected(true);
-        listView.setTextFilterEnabled(true);
 
 
     }
@@ -342,28 +337,50 @@ public class inputpenjualan extends AppCompatActivity {
 
             String value = (String) data.getExtras().getString("kode", "");
             String value2 = (String) data.getExtras().getString("nama", "");
-            String value3 = (String) data.getExtras().getString("stok", "");
-            Toast.makeText(getApplicationContext(), value2, Toast.LENGTH_LONG).show();
-            showChangeLangDialog();
+            String value3 = (String) data.getExtras().getString("stok", "0");
+            String value4 = (String) data.getExtras().getString("harga", "0");
+            String value5 = (String) data.getExtras().getString("harga2", "0");
+           //Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
+            showChangeLangDialog(value,value2,value3,value4,value5);
         }
     }
 
-    public void showChangeLangDialog() {
+    public void showChangeLangDialog(final String kode,final String nama,String stok,final String harga,final String harga2) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialogbarang, null);
         dialogBuilder.setView(dialogView);
 
-        //final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
+        final TextView txtnama = (TextView) dialogView.findViewById(R.id.txtbarang);
+        final EditText txtharga = (EditText) dialogView.findViewById(R.id.txtharga);
+        final TextView txtstok = (TextView) dialogView.findViewById(R.id.txtstok);
+        final TextView txtjum = (TextView) dialogView.findViewById(R.id.txtjum);
 
-        dialogBuilder.setTitle("Input");
-        dialogBuilder.setMessage("Enter text below");
-        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        txtnama.setText(nama);
+        txtharga.setText(String.valueOf(harga));
+        txtstok.setText(stok);
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //do something with edt.getText().toString();
+               // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
+
+                Double ttl=  NumberFormat.getInstance(Locale.getDefault()).parse("25.46").doubleValue()* Double.parseDouble(txtharga.getText().toString());
+                daftarkode.add(kode);
+                daftarnama.add(nama);
+                daftarjumlah.add(Double.parseDouble(txtjum.getText().toString()));
+                daftarharga.add(Double.parseDouble(txtharga.getText().toString()));
+                daftartotal.add(ttl);
+
+                itemdaftarbarang wp = new  itemdaftarbarang (kode, nama,txtjum.getText().toString() + " x " + txtharga.getText().toString(),String.valueOf(ttl));
+                arraylist.add(wp);
+                listView = (ListView) findViewById(R.id.list_satuan);
+                // listView.addFooterView(footer);
+                adapter = new Listdaftarbarang(inputpenjualan.this,arraylist ,20,10);
+                listView.setAdapter(adapter);
+                //Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_LONG).show();
+
             }
         });
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        dialogBuilder.setNegativeButton(R.string.batal, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //pass
             }

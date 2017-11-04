@@ -4,21 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:id="@+id/s1"
-            >
 
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -43,6 +29,7 @@
                         android:id="@+id/txtinfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Input"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -160,7 +147,7 @@
                         />
 
                     <EditText
-                        android:id="@+id/txtpelanggan"
+                        android:id="@+id/txtjum"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number|numberSigned"
@@ -170,6 +157,7 @@
                         android:layout_toRightOf="@id/t30"
                         android:textColor="@color/black"
                         android:layout_below="@+id/t755" >
+                        <requestFocus />
                     </EditText>
 
                 </RelativeLayout>
@@ -177,10 +165,6 @@
             </android.support.v7.widget.CardView>
 
 
-
-
-        </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
 
 
 </RelativeLayout>
