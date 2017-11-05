@@ -342,11 +342,11 @@ public class inputpenjualan extends AppCompatActivity {
             String value4 = (String) data.getExtras().getString("harga", "0");
             String value5 = (String) data.getExtras().getString("harga2", "0");
            //Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
-            showChangeLangDialog(value,value2,value3,value4,value5);
+            detilbarang(value,value2,value3,value4,value5);
         }
     }
 
-    public void showChangeLangDialog(final String kode,final String nama,String stok,final String harga,final String harga2) {
+    public void detilbarang(final String kode,final String nama,String stok,final String harga,final String harga2) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialogbarang, null);
@@ -397,6 +397,59 @@ public class inputpenjualan extends AppCompatActivity {
         AlertDialog b = dialogBuilder.create();
         b.show();
     }
+
+    public void pembayaran(final Double total) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialogbarang, null);
+        dialogBuilder.setView(dialogView);
+
+        final TextView txtnama = (TextView) dialogView.findViewById(R.id.txtbarang);
+        final EditText txtharga = (EditText) dialogView.findViewById(R.id.txtharga);
+        final TextView txtstok = (TextView) dialogView.findViewById(R.id.txtstok);
+        final TextView txtjum = (TextView) dialogView.findViewById(R.id.txtjum);
+
+        txtnama.setText(nama);
+        txtharga.setText(String.valueOf(harga));
+        txtstok.setText(stok);
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
+
+                Double ttl= null;Double vharga=null;Double vjum=null;
+                try {
+                    ttl = NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue()* NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
+                    vharga =  NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
+                    vjum =  NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue();
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                daftarkode.add(kode);
+                daftarnama.add(nama);
+                daftarjumlah.add(vjum);
+                daftarharga.add(vharga);
+                daftartotal.add(ttl);
+
+                itemdaftarbarang wp = new  itemdaftarbarang (kode, nama,txtjum.getText().toString() + " x " + txtharga.getText().toString(),String.valueOf(ttl));
+                arraylist.add(wp);
+                listView = (ListView) findViewById(R.id.list_satuan);
+                // listView.addFooterView(footer);
+                adapter = new Listdaftarbarang(inputpenjualan.this,arraylist ,20,10);
+                listView.setAdapter(adapter);
+                //Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_LONG).show();
+
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.batal, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
