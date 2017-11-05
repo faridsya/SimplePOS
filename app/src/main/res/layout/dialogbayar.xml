@@ -35,11 +35,11 @@
 
                     <TextView
                         android:id="@+id/t77"
-                        android:layout_width="120dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_below="@+id/txtinfo"
-                        android:text="@string/barang"
+                        android:text="Total"
                         />
                     <TextView
                         android:id="@+id/t30"
@@ -53,7 +53,7 @@
                         android:text=":"
                         />
                     <TextView
-                        android:id="@+id/txtbarang"
+                        android:id="@+id/txttotal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
 
@@ -66,11 +66,11 @@
                         </TextView>
                     <TextView
                         android:id="@+id/t74"
-                        android:layout_width="120dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_below="@+id/t77"
-                        android:text="@string/harga"
+                        android:text="Cash"
                         />
                     <TextView
                         android:id="@+id/t31"
@@ -85,7 +85,7 @@
                         />
 
                     <EditText
-                        android:id="@+id/txtharga"
+                        android:id="@+id/txtbayar"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number|numberSigned"
@@ -95,70 +95,7 @@
                         android:textColor="@color/black"
                         android:layout_below="@+id/t77" >
                     </EditText>
-                    <TextView
-                        android:id="@+id/t755"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@+id/t74"
-                        android:text="@string/stok"/>
-                    <TextView
-                        android:id="@+id/t320"
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_toRightOf="@+id/t755"
-                        android:layout_below="@+id/t74"
 
-                        android:text=":"
-                        />
-
-                    <TextView
-                        android:id="@+id/txtstok"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp"
-
-                        android:layout_toRightOf="@id/t30"
-                        android:textColor="@color/black"
-                        android:layout_below="@+id/t74" >
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/t75"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@+id/t755"
-                        android:text="@string/jumlah"/>
-                    <TextView
-                        android:id="@+id/t32"
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_toRightOf="@+id/t75"
-                        android:layout_below="@+id/t755"
-
-                        android:text=":"
-                        />
-
-                    <EditText
-                        android:id="@+id/txtjum"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number|numberSigned"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp"
-
-                        android:layout_toRightOf="@id/t30"
-                        android:textColor="@color/black"
-                        android:layout_below="@+id/t755" >
-                        <requestFocus />
-                    </EditText>
 
                 </RelativeLayout>
 

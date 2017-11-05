@@ -48,7 +48,7 @@ public class inputpenjualan extends AppCompatActivity {
     TextView txtjudul;
     RelativeLayout kotak;
     SharedPreferences sharedpreferences;
-    ImageView panah,panah2,cmdcari;
+    ImageView panah,panah2,cmdcari,cmdbayar;
     String[] daftar;
     ValueAnimator mAnimator;
     ImageView oto;
@@ -85,6 +85,7 @@ public class inputpenjualan extends AppCompatActivity {
         kotak = (RelativeLayout) findViewById(R.id.kotaksimpan);
         panah=(ImageView) findViewById(R.id.panah);
         panah2=(ImageView) findViewById(R.id.panah2);
+        cmdbayar=(ImageView) findViewById(R.id.bayar);
         panah.setVisibility(View.VISIBLE);
         cmdtgl = (Button) findViewById(R.id.cmdtgl);
         cmdcus = (Button) findViewById(R.id.cmdcus);
@@ -128,7 +129,15 @@ public class inputpenjualan extends AppCompatActivity {
 
             }
         });
+        cmdbayar.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                panah.setVisibility(View.GONE);panah2.setVisibility(View.VISIBLE);
+                //kotak.setVisibility(View.GONE);
+                pembayaran(20.00);
+            }
+        });
         cmdcus.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -401,7 +410,7 @@ public class inputpenjualan extends AppCompatActivity {
     public void pembayaran(final Double total) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.dialogbarang, null);
+        final View dialogView = inflater.inflate(R.layout.dialogbayar, null);
         dialogBuilder.setView(dialogView);
 
         final TextView txtnama = (TextView) dialogView.findViewById(R.id.txtbarang);
@@ -409,9 +418,7 @@ public class inputpenjualan extends AppCompatActivity {
         final TextView txtstok = (TextView) dialogView.findViewById(R.id.txtstok);
         final TextView txtjum = (TextView) dialogView.findViewById(R.id.txtjum);
 
-        txtnama.setText(nama);
-        txtharga.setText(String.valueOf(harga));
-        txtstok.setText(stok);
+
         dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
@@ -425,18 +432,9 @@ public class inputpenjualan extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                daftarkode.add(kode);
-                daftarnama.add(nama);
-                daftarjumlah.add(vjum);
-                daftarharga.add(vharga);
-                daftartotal.add(ttl);
 
-                itemdaftarbarang wp = new  itemdaftarbarang (kode, nama,txtjum.getText().toString() + " x " + txtharga.getText().toString(),String.valueOf(ttl));
-                arraylist.add(wp);
-                listView = (ListView) findViewById(R.id.list_satuan);
-                // listView.addFooterView(footer);
-                adapter = new Listdaftarbarang(inputpenjualan.this,arraylist ,20,10);
-                listView.setAdapter(adapter);
+
+
                 //Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_LONG).show();
 
             }
