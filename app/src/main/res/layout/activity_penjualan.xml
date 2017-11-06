@@ -207,14 +207,15 @@
                 android:text="TOTAL  :" />
 
             <TextView
-                android:id="@+id/ttotal"
+                android:id="@+id/txttotal"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_toRightOf="@id/txtttl"
+                android:textSize="16sp"
                 android:text="@string/tanggal"
                 android:gravity="right"
                 android:textColor="@color/white"

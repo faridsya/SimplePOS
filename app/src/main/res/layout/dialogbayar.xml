@@ -64,12 +64,75 @@
                         android:textColor="@color/black"
                         android:layout_below="@+id/txtinfo" >
                         </TextView>
+
+                    <CheckBox
+                        android:id="@+id/t744"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_below="@+id/txttotal"
+                        android:text="@string/pajak"
+                        />
+                    <TextView
+                        android:id="@+id/t311"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/t744"
+                        android:layout_below="@+id/txttotal"
+
+                        android:text=":"
+                        />
+                    <EditText
+                        android:id="@+id/txtpajak"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberSigned"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/t311"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/t30" >
+                    </EditText>
+                    <CheckBox
+                        android:id="@+id/t742"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/t744"
+                        android:layout_marginLeft="0dp"
+                        android:text="@string/diskon"
+                        />
+                    <TextView
+                        android:id="@+id/t312"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/t742"
+                        android:layout_below="@+id/t744"
+
+                        android:text=":"
+                        />
+                    <EditText
+                        android:id="@+id/txtpajaknya"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberSigned"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/t312"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/t744" >
+                    </EditText>
                     <TextView
                         android:id="@+id/t74"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_below="@+id/t77"
+                        android:layout_below="@+id/t742"
                         android:text="Cash"
                         />
                     <TextView
@@ -79,7 +142,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_toRightOf="@+id/t74"
-                        android:layout_below="@+id/t77"
+                        android:layout_below="@+id/t742"
 
                         android:text=":"
                         />
@@ -91,9 +154,9 @@
                         android:inputType="number|numberSigned"
                         android:padding="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@id/t30"
+                        android:layout_toRightOf="@id/t31"
                         android:textColor="@color/black"
-                        android:layout_below="@+id/t77" >
+                        android:layout_below="@+id/t742" >
                     </EditText>
 
 

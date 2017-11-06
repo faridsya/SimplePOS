@@ -34,8 +34,8 @@ public class Datacaribarang extends AppCompatActivity {
     EditText editsearch;
     ImageView barcode;
     String form;
-    TextView txtkode,txtnama,txtstok,txtharga,txtharga2;
-    String kodekat,namakat,stok,harga,harga2;
+    TextView txtkode,txtnama,txtstok,txtharga,txtharga2,txtmodal;
+    String kodekat,namakat,stok,harga,harga2,modal;
     private int jenis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,11 +114,13 @@ public class Datacaribarang extends AppCompatActivity {
              txtstok = (TextView) view.findViewById(R.id.txtstok);
             txtharga= (TextView) view.findViewById(R.id.txtharga);
             txtharga2= (TextView) view.findViewById(R.id.txtharga2);
+            txtmodal= (TextView) view.findViewById(R.id.txtmodal);
             kodekat = txtkode.getText().toString();
              namakat = txtnama.getText().toString();
              stok = txtstok.getText().toString();
              harga=txtharga.getText().toString();
             harga2=txtharga2.getText().toString();
+            modal=txtmodal.getText().toString();
             //Toast.makeText(getApplicationContext(), str + " is pressed " + position, Toast.LENGTH_SHORT).show();
 
 
@@ -153,6 +155,7 @@ public class Datacaribarang extends AppCompatActivity {
         intent.putExtra("stok", stok);
         intent.putExtra("harga", harga);
         intent.putExtra("harga2", harga2);
+        intent.putExtra("modal", modal);
         setResult(22, intent);
         finish();
     }
@@ -177,7 +180,7 @@ public class Datacaribarang extends AppCompatActivity {
             DecimalFormat formatter = new DecimalFormat("#,###,###");
             String harga = formatter.format(Double.parseDouble(result.getString(result.getColumnIndex("c_hargajual1"))));
             String harga2 = formatter.format(Double.parseDouble(result.getString(result.getColumnIndex("c_hargajual2"))));
-            imageItems.add(new itemcaribarang(bitmap, result.getString(result.getColumnIndex("c_kodebrg")),result.getString(result.getColumnIndex("c_deskripsi")), harga,harga2, result.getString(result.getColumnIndex("c_stok"))));
+            imageItems.add(new itemcaribarang(bitmap, result.getString(result.getColumnIndex("c_kodebrg")),result.getString(result.getColumnIndex("c_deskripsi")), harga,harga2, result.getString(result.getColumnIndex("c_stok")),result.getString(result.getColumnIndex("c_hargabeli"))));
         }
         return imageItems;
     }

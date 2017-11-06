@@ -4,9 +4,9 @@ import android.graphics.Bitmap;
 
 public class itemcaribarang {
     private Bitmap image;
-    private String title,nama,harga,stok,harga2;
+    private String title,nama,harga,stok,harga2,modal;
 
-    public itemcaribarang(Bitmap image, String title, String nama, String harga,String harga2, String stok) {
+    public itemcaribarang(Bitmap image, String title, String nama, String harga,String harga2, String stok,String modal) {
         super();
         this.image = image;
         this.title = title;
@@ -14,6 +14,7 @@ public class itemcaribarang {
         this.harga=harga;
         this.harga2=harga2;
         this.stok=stok;
+        this.modal=modal;
     }
 
     public Bitmap getImage() {
@@ -39,6 +40,7 @@ public class itemcaribarang {
     public String getharga2() {
         return harga2;
     }
+    public String getModal(){return modal;};
     public void setTitle(String title) {
         this.title = title;
     }

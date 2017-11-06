@@ -69,5 +69,7 @@
     <string name="no">No</string>
     <string name="harga1">Price1\u0009:\u00A0 </string>
     <string name="harga2">Price2\u0009:\u00A0 </string>
+    <string name="pajak">Tax</string>
+    <string name="diskon">Disc</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

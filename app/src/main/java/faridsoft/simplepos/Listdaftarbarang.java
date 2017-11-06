@@ -129,6 +129,11 @@ public class Listdaftarbarang extends BaseAdapter {
                                     switch (item.getItemId()) {
                                         case R.id.update:
 
+                                            if(mContext instanceof inputpenjualan){
+                                                ((inputpenjualan)mContext).detilbarangapdet(((inputpenjualan)mContext).daftarkode.get(position),
+                                                        ((inputpenjualan)mContext).daftarnama.get(position),String.valueOf (((inputpenjualan)mContext).daftarstok.get(position) ),String.valueOf(((inputpenjualan)mContext).daftarharga.get(position)) ,
+                                                        ((inputpenjualan)mContext).daftarkode.get(position),position);
+                                            }
 
                                             break;
                                         case R.id.hapus:
@@ -139,16 +144,17 @@ public class Listdaftarbarang extends BaseAdapter {
                                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                                         public void onClick(DialogInterface arg0, int arg1) {
-                                                            dbHelper = new DataHelper(mContext);
-                                                            SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-                                                            db.execSQL("delete from t_sesuai where id = '"+kodekat+"'");
-                                                            Toast.makeText(mContext, R.string.sukses, Toast.LENGTH_LONG).show();
-                                                            if(mContext instanceof Datasesuai){
-                                                                ((Datasesuai)mContext).datasupplier("");
+                                                            if(mContext instanceof inputpenjualan){
+                                                                ((inputpenjualan)mContext).arraylist.remove(position);
+                                                                ((inputpenjualan)mContext).adapter.notifyDataSetChanged();
+                                                                ((inputpenjualan)mContext).daftarkode.remove(position);
+                                                                ((inputpenjualan)mContext).daftarharga.remove(position);
+                                                                ((inputpenjualan)mContext).daftarjumlah.remove(position);
+                                                                ((inputpenjualan)mContext).daftartotal.remove(position);
+                                                                ((inputpenjualan)mContext).daftarstok.remove(position);
+                                                                ((inputpenjualan)mContext).daftarmodal.remove(position);
+                                                                ((inputpenjualan)mContext).txttotal.setText(((inputpenjualan)mContext).formatter.format(((inputpenjualan)mContext).totalharga())); ;
                                                             }
-                                                            EditText txtcari = (EditText) ((Datasesuai)mContext).findViewById(R.id.search);
-                                                            txtcari.setText("");
 
                                                         }
                                                     }).create().show();

@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,11 +47,12 @@ public class inputpenjualan extends AppCompatActivity {
     private ListView listView;
     private String idpelanggan;
     Listdaftarbarang adapter;
-    TextView txtjudul;
+    TextView txttotal;
     RelativeLayout kotak;
     SharedPreferences sharedpreferences;
     ImageView panah,panah2,cmdcari,cmdbayar;
     String[] daftar;
+    private CheckBox cekpajak;
     ValueAnimator mAnimator;
     ImageView oto;
     Button cmdtgl;
@@ -60,8 +63,11 @@ public class inputpenjualan extends AppCompatActivity {
     ArrayList<String> daftarnama = new ArrayList<>();
     ArrayList<Double> daftarjumlah = new ArrayList<>();
     ArrayList<Double> daftarharga = new ArrayList<>();
-    ArrayList<Double> daftartotal = new ArrayList<>();
+    ArrayList<Double> daftartotal= new ArrayList<>();
+    ArrayList<Double> daftarmodal= new ArrayList<>();
+    ArrayList<Double> daftarstok= new ArrayList<>();
     ArrayList<itemdaftarbarang> arraylist = new ArrayList<itemdaftarbarang>();
+    DecimalFormat formatter = new DecimalFormat("#,###,###");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +88,8 @@ public class inputpenjualan extends AppCompatActivity {
         cmdcari=(ImageView) findViewById(R.id.cari);
         oto = (ImageView) findViewById(R.id.oto);
         txtkode = (EditText) findViewById(R.id.txtkode);
+        txttotal = (TextView) findViewById(R.id.txttotal);
+
         kotak = (RelativeLayout) findViewById(R.id.kotaksimpan);
         panah=(ImageView) findViewById(R.id.panah);
         panah2=(ImageView) findViewById(R.id.panah2);
@@ -133,9 +141,12 @@ public class inputpenjualan extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                panah.setVisibility(View.GONE);panah2.setVisibility(View.VISIBLE);
+                //panah.setVisibility(View.GONE);panah2.setVisibility(View.VISIBLE);
                 //kotak.setVisibility(View.GONE);
-                pembayaran(20.00);
+                if (daftartotal.isEmpty()) return;
+
+
+                pembayaran(totalharga());
             }
         });
         cmdcus.setOnClickListener(new View.OnClickListener() {
@@ -180,8 +191,17 @@ public class inputpenjualan extends AppCompatActivity {
         });
 
 
+
     }
 
+
+    public double totalharga(){
+        int i;
+        double sum = 0;
+        for(i = 0; i <daftartotal.size(); i++)
+            sum += daftartotal.get(i);
+        return sum;
+    }
     private void showDateDialog(){
         Calendar newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -350,12 +370,13 @@ public class inputpenjualan extends AppCompatActivity {
             String value3 = (String) data.getExtras().getString("stok", "0");
             String value4 = (String) data.getExtras().getString("harga", "0");
             String value5 = (String) data.getExtras().getString("harga2", "0");
+            String value6 = (String) data.getExtras().getString("modal", "0");
            //Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
-            detilbarang(value,value2,value3,value4,value5);
+            detilbarang(value,value2,value3,value4,value5,value6);
         }
     }
 
-    public void detilbarang(final String kode,final String nama,String stok,final String harga,final String harga2) {
+    public void detilbarang(final String kode, final String nama, final String stok, final String harga, final String harga2, final String modal) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialogbarang, null);
@@ -371,7 +392,79 @@ public class inputpenjualan extends AppCompatActivity {
         txtstok.setText(stok);
         dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-               // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
+               Toast.makeText(getApplicationContext(), modal, Toast.LENGTH_LONG).show();
+
+                Double ttl= null;Double vharga=null;Double vjum=null;Double vmodal=null;
+                try {
+                    ttl = NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue()* NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
+                    vharga =  NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
+                    vjum =  NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue();
+                    vmodal =  NumberFormat.getInstance(Locale.getDefault()).parse(modal).doubleValue();
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if(!daftarkode.contains(kode)) {
+                    daftarkode.add(kode);
+                    daftarnama.add(nama);
+                    daftarjumlah.add(vjum);
+                    daftarharga.add(vharga);
+                    daftartotal.add(ttl);
+                    daftarmodal.add(vmodal);
+                    daftarstok.add(Double.parseDouble(stok));
+                    String hargatotal = formatter.format(ttl);
+                    itemdaftarbarang wp = new  itemdaftarbarang (kode, nama,txtjum.getText().toString() + " x " + txtharga.getText().toString(),hargatotal);
+
+                    arraylist.add(wp);
+
+                    listView = (ListView) findViewById(R.id.list_satuan);
+                    // listView.addFooterView(footer);
+                    adapter = new Listdaftarbarang(inputpenjualan.this,arraylist ,20,10);
+                    listView.setAdapter(adapter);
+
+
+
+                }
+                else
+                {
+                    int i=daftarkode.indexOf(kode);
+                    daftarjumlah.set(i,(daftarjumlah.get(i)+vjum));
+                    daftartotal.set(i,daftarharga.get(i)*daftarjumlah.get(i));
+                    itemdaftarbarang wp = new  itemdaftarbarang (daftarkode.get(i), nama,formatter.format(daftarjumlah.get(i)) + " x " +formatter.format(daftarharga.get(i)) ,formatter.format(daftartotal.get(i)));
+                    arraylist.set(i,wp);
+                   adapter.notifyDataSetChanged();
+                }
+                //Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_LONG).show();
+                txttotal.setText(formatter.format(totalharga())); ;
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.batal, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+
+    public void detilbarangapdet(final String kode,final String nama,String stok,final String harga,final String harga2,final int posisi) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialogbarang, null);
+        dialogBuilder.setView(dialogView);
+
+        final TextView txtnama = (TextView) dialogView.findViewById(R.id.txtbarang);
+        final EditText txtharga = (EditText) dialogView.findViewById(R.id.txtharga);
+        final TextView txtstok = (TextView) dialogView.findViewById(R.id.txtstok);
+        final TextView txtjum = (TextView) dialogView.findViewById(R.id.txtjum);
+
+        txtnama.setText(nama);
+        txtharga.setText(String.valueOf(harga));
+        txtstok.setText(String.valueOf(stok));
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
 
                 Double ttl= null;Double vharga=null;Double vjum=null;
                 try {
@@ -382,18 +475,17 @@ public class inputpenjualan extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                daftarkode.add(kode);
-                daftarnama.add(nama);
-                daftarjumlah.add(vjum);
-                daftarharga.add(vharga);
-                daftartotal.add(ttl);
 
-                itemdaftarbarang wp = new  itemdaftarbarang (kode, nama,txtjum.getText().toString() + " x " + txtharga.getText().toString(),String.valueOf(ttl));
-                arraylist.add(wp);
-                listView = (ListView) findViewById(R.id.list_satuan);
-                // listView.addFooterView(footer);
-                adapter = new Listdaftarbarang(inputpenjualan.this,arraylist ,20,10);
-                listView.setAdapter(adapter);
+
+
+                    daftarjumlah.set(posisi,(vjum));
+                    daftartotal.set(posisi,ttl);
+                    daftarjumlah.set(posisi,vharga);
+
+                    itemdaftarbarang wp = new  itemdaftarbarang (daftarkode.get(posisi), nama,formatter.format(vjum) + " x " +formatter.format(vharga) ,formatter.format(daftartotal.get(posisi)));
+                    arraylist.set(posisi,wp);
+                    adapter.notifyDataSetChanged();
+                txttotal.setText(formatter.format(totalharga())); ;
                 //Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_LONG).show();
 
             }
@@ -413,22 +505,32 @@ public class inputpenjualan extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.dialogbayar, null);
         dialogBuilder.setView(dialogView);
 
-        final TextView txtnama = (TextView) dialogView.findViewById(R.id.txtbarang);
-        final EditText txtharga = (EditText) dialogView.findViewById(R.id.txtharga);
-        final TextView txtstok = (TextView) dialogView.findViewById(R.id.txtstok);
-        final TextView txtjum = (TextView) dialogView.findViewById(R.id.txtjum);
+        final TextView txttotal = (TextView) dialogView.findViewById(R.id.txttotal);
+        cekpajak = (CheckBox) dialogView.findViewById(R.id.t744);
+        final EditText txtbayar = (EditText) dialogView.findViewById(R.id.txtbayar);
+        String hargatotal = formatter.format(total);
+        txttotal.setText(hargatotal);
 
 
+        cekpajak.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                if (((CheckBox) v).isChecked()) {
+                    Toast.makeText(getApplicationContext(), "Bro, try Android :)", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
         dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
 
-                Double ttl= null;Double vharga=null;Double vjum=null;
+                Double bayar= null;
                 try {
-                    ttl = NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue()* NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
-                    vharga =  NumberFormat.getInstance(Locale.getDefault()).parse(txtharga.getText().toString()).doubleValue();
-                    vjum =  NumberFormat.getInstance(Locale.getDefault()).parse(txtjum.getText().toString()).doubleValue();
-
+                    bayar =  NumberFormat.getInstance(Locale.getDefault()).parse(txtbayar.getText().toString()).doubleValue();
+                    Toast.makeText(getApplicationContext(), String.valueOf(bayar), Toast.LENGTH_LONG).show();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

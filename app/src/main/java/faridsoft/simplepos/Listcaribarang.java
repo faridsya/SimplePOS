@@ -45,7 +45,7 @@ public class Listcaribarang extends BaseAdapter {
         return this.datatemenlist;
     }
     public class ViewHolder {
-        TextView imageTitle,deskripsi,harga,stok,harga2;
+        TextView imageTitle,deskripsi,harga,stok,harga2,modal;
         ImageView image;
 
 
@@ -80,6 +80,7 @@ public class Listcaribarang extends BaseAdapter {
             holder.stok  = (TextView) view.findViewById(R.id.txtstok);
             holder.harga = (TextView) view.findViewById(R.id.txtharga);
             holder.harga2 = (TextView) view.findViewById(R.id.txtharga2);
+            holder.modal = (TextView) view.findViewById(R.id.txtmodal);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -91,6 +92,7 @@ public class Listcaribarang extends BaseAdapter {
         holder.image.setImageBitmap(item.getImage());
         holder.stok.setText(item.getstok());
         holder.harga.setText(item.getharga());
+        holder.modal.setText(item.getModal());
         holder.harga2.setText(item.getharga2());
 
 

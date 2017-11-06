@@ -73,14 +73,24 @@
 
 
     <TextView
-        android:id="@+id/txtstok"
+    android:id="@+id/txtstok"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/txtharga2"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:text="aw"
+    android:layout_toRightOf="@+id/t7"
+    android:textSize="12sp" />
+    <TextView
+        android:id="@+id/txtmodal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtharga2"
+        android:layout_below="@+id/txtstok"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
-android:text="aw"
-        android:layout_toRightOf="@+id/t7"
+        android:text="aw"
+        android:visibility="gone"
         android:textSize="12sp" />
 
 </RelativeLayout>
