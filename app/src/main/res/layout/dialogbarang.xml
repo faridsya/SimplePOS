@@ -35,7 +35,7 @@
 
                     <TextView
                         android:id="@+id/t77"
-                        android:layout_width="120dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_below="@+id/txtinfo"
@@ -66,7 +66,7 @@
                         </TextView>
                     <TextView
                         android:id="@+id/t74"
-                        android:layout_width="120dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_below="@+id/t77"
@@ -97,7 +97,7 @@
                     </EditText>
                     <TextView
                         android:id="@+id/t755"
-                        android:layout_width="120dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_below="@+id/t74"
@@ -129,7 +129,7 @@
 
                     <TextView
                         android:id="@+id/t75"
-                        android:layout_width="120dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_below="@+id/t755"

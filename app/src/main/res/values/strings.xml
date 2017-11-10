@@ -71,5 +71,11 @@
     <string name="harga2">Price2\u0009:\u00A0 </string>
     <string name="pajak">Tax</string>
     <string name="diskon">Disc</string>
+    <string name="takterdaftar">Product unlist!!!</string>
+    <string name="diskonpajak">Tax And Discount</string>
+    <string name="persenpajak">% Tax</string>
+    <string name="persendiskon">% Discount</string>
+    <string name="bantuan">Help</string>
+    <string name="tophari">TOP(in day/s)</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

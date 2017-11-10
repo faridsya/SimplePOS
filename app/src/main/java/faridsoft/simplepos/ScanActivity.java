@@ -51,9 +51,12 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         else if(form=="inputbarang") {
             intent = new Intent(getApplicationContext(), inputbarang.class);
         }
-
+        else if(form=="penjualan") {
+            intent = new Intent(getApplicationContext(), inputpenjualan.class);
+        }
         else
             intent = new Intent(getApplicationContext(), inputbarang.class);
+
         intent.putExtra("hasil", rawResult.getText());
 
         setResult(25, intent);

@@ -67,9 +67,15 @@
     <string name="harga">Harga</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
-    <string name="harga1">Harga1\u0009:\u00A0</string>
-    <string name="harga2">Harga2\u0009:\u00A0</string>
+    <string name="harga1">Harga1\u0009\u0009:\u00A0</string>
+    <string name="harga2">Harga2\u0009\u0009:\u00A0</string>
     <string name="pajak">Pajak</string>
     <string name="diskon">Diskon</string>
+    <string name="takterdaftar">Barang tidak terdaftar!!!</string>
+    <string name="diskonpajak">PPN Dan Diskon</string>
+    <string name="persenpajak">% Pajak</string>
+    <string name="persendiskon">% Diskon</string>
+    <string name="bantuan">Bantuan</string>
+    <string name="tophari">TOP(hari)</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

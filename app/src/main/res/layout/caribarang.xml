@@ -39,10 +39,11 @@
         android:textSize="12sp" />
     <TextView
         android:id="@+id/txtharga"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtkode"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/lblharga"
         android:textSize="12sp" />
     <TextView
@@ -55,10 +56,12 @@
         android:textSize="12sp" />
     <TextView
         android:id="@+id/txtharga2"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtharga"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="sdfdsf"
         android:layout_toRightOf="@+id/lblharga2"
         android:textSize="12sp" />
 

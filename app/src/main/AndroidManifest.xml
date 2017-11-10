@@ -43,6 +43,7 @@
         <activity android:name=".Datasesuai" />
         <activity android:name=".Pengaturan"></activity>
         <activity android:name=".inputpenjualan"></activity>
+        <activity android:name=".PengaturanJual"></activity>
     </application>
 
 </manifest>

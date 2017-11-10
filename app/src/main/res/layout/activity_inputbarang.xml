@@ -141,7 +141,7 @@
             android:background="@drawable/cmdcoklat"
             android:layout_below="@+id/t5"
             android:text="@string/pilih"
-            android:onClick="pilihsatuan"
+
             />
 
             />
