@@ -104,6 +104,21 @@ public ProgressDialog spinner;
         benar=(result.getCount()>0 )?   true :  false;
         return benar;
     }
+
+    public boolean hapusbarang(String kode,Context context){
+        boolean benar;
+        DataHelper dbHelper;
+        dbHelper = new DataHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor result = db.rawQuery("select * from t_penjualandetil  where c_kodebrg='"+ kode +"'", null);
+        benar=(result.getCount()>0 )?   true :  false; result.close();
+        if(!benar){
+            result = db.rawQuery("select * from t_sesuai  where c_kodebrg='"+ kode +"'", null);
+            benar=(result.getCount()>0 )?   true :  false;
+        }
+        return benar;
+    }
     public void pesan(Context context,String pesan){
         Toast.makeText(context, pesan, Toast.LENGTH_LONG).show();
 

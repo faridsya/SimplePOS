@@ -104,7 +104,7 @@ public class Datasesuai extends AppCompatActivity implements AbsListView.OnScrol
 
         listView = (ListView) findViewById(R.id.listview);
         listView.addFooterView(footer);
-        adapter = new Listsesuai(this,arraylist,20,10);
+        adapter = new Listsesuai(this,R.layout.listsesuai,arraylist,20,10);
         listView.setAdapter(adapter);
         listView.setSelected(true);
         listView.setScrollContainer(false);

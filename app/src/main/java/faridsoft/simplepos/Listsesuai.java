@@ -29,16 +29,18 @@ public class Listsesuai extends BaseAdapter {
     private int count;
     private int stepNumber;
     private int startCount;
+    private int layoutResourceId;
     Context mContext;
     LayoutInflater inflater;
     private List<itemsesuai> datatemenlist = null;
     private ArrayList<itemsesuai> arraylist;
     private int posisi;
-    public Listsesuai(Context context, List<itemsesuai> itemsesuai, int startCount, int stepNumber) {
+    public Listsesuai(Context context,int layoutResourceId, List<itemsesuai> itemsesuai, int startCount, int stepNumber) {
         this.mContext = context;
         this.startCount = Math.min(startCount, itemsesuai.size()); //don't try to show more views than we have
         this.count = this.startCount;
         this.stepNumber = stepNumber;
+        this.layoutResourceId = layoutResourceId;
         this.datatemenlist = itemsesuai;
         inflater = LayoutInflater.from(mContext);
         this.arraylist = new ArrayList<itemsesuai>();
@@ -74,7 +76,7 @@ public class Listsesuai extends BaseAdapter {
         this.posisi=position;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.listsesuai, null);
+            view = inflater.inflate(layoutResourceId, null);
             // Locate the TextViews in listview_item.xml
             holder.ids = (TextView) view.findViewById(R.id.txtid);
             holder.kodebrg = (TextView) view.findViewById(R.id.txtkodebrg);

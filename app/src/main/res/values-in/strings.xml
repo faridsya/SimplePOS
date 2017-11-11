@@ -77,5 +77,8 @@
     <string name="persendiskon">% Diskon</string>
     <string name="bantuan">Bantuan</string>
     <string name="tophari">TOP(hari)</string>
+    <string name="datapelanggan">Data Pelanggan</string>
+    <string name="datapenjualan">Data Penjualan</string>
+    <string name="tanpapelanggan">Tanpa pelanggan</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

@@ -41,7 +41,7 @@ public class Pelanggan extends AppCompatActivity implements AbsListView.OnScroll
                 onBackPressed();
             }
         });
-        getSupportActionBar().setTitle("Data Pelanggan");
+        getSupportActionBar().setTitle(R.string.datapelanggan);
         dbHelper = new DataHelper(this);
          footer = getLayoutInflater().inflate(R.layout.next, null);
         progressBar = (ProgressBar) footer.findViewById(R.id.progressBar);

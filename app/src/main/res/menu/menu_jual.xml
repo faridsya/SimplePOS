@@ -12,6 +12,12 @@
         android:icon="@drawable/ic_setting"
         app:showAsAction="never" />
     <item
+        android:id="@+id/data"
+        android:title="@string/datapenjualan"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_setting"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/bantu"
         android:title="@string/bantuan"
         android:orderInCategory="100"

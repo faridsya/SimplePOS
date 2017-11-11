@@ -150,7 +150,10 @@ public class inputpenjualan extends AppCompatActivity {
             public void onClick(View arg0) {
                 //panah.setVisibility(View.GONE);panah2.setVisibility(View.VISIBLE);
                 //kotak.setVisibility(View.GONE);
-                if (daftartotal.isEmpty()) return;
+                if (daftartotal.isEmpty()||txtkode.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), R.string.belumlengkap, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 pembayaran(totalharga());
             }
         });
@@ -258,7 +261,6 @@ public class inputpenjualan extends AppCompatActivity {
             result.moveToFirst();
             String kode = result.getString(result.getColumnIndex("c_idpenjualan"));
             String kode2 = kode.substring(9,12);
-            Toast.makeText(getApplicationContext(), kode2, Toast.LENGTH_LONG).show();
             j=Integer.valueOf(kode2);
             n=j+1;
             //No=kode2;
@@ -287,6 +289,20 @@ public class inputpenjualan extends AppCompatActivity {
                     bayarnya + "','" +
                     Integer.parseInt(top)  + "','" +
                     user + "')");
+
+            int i;
+
+            for(i = 0; i <daftarkode.size(); i++)
+            {
+                db.execSQL("insert into t_penjualandetil values('" +
+                        txtkode.getText().toString() + "','" +
+                        daftarkode.get(i) + "','" +
+                        daftarjumlah.get(i) + "','" +
+                        daftarmodal.get(i) + "','" +
+                        daftarharga.get(i) + "')");
+            }
+
+
             Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
 
             kosong();
@@ -417,8 +433,7 @@ public class inputpenjualan extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.takterdaftar , Toast.LENGTH_LONG).show();return;
             }
             result.moveToFirst();
-            detilbarang(result.getString(result.getColumnIndex("c_kodebrg")),result.getString(result.getColumnIndex("c_deskripsi")),result.getString(result.getColumnIndex("c_stok")),
-                    result.getString(result.getColumnIndex("c_hargajual1")),result.getString(result.getColumnIndex("c_hargajual2")),result.getString(result.getColumnIndex("c_hargabeli")));
+            detilbarang(result.getString(result.getColumnIndex("c_kodebrg")),result.getString(result.getColumnIndex("c_deskripsi")),result.getString(result.getColumnIndex("c_stok")), result.getString(result.getColumnIndex("c_hargajual1")),result.getString(result.getColumnIndex("c_hargajual2")),result.getString(result.getColumnIndex("c_hargabeli")));
             //txtkode.setText(value);
         }
     }
@@ -693,7 +708,7 @@ public class inputpenjualan extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // Toast.makeText(getApplicationContext(), value4, Toast.LENGTH_LONG).show();
 
-                Double bayar= null;
+                Double bayar= 0.0;
                 try {
                     bayar =  NumberFormat.getInstance(Locale.getDefault()).parse(txtbayar.getText().toString()).doubleValue();
                     //Toast.makeText(getApplicationContext(), String.valueOf(bayar), Toast.LENGTH_LONG).show();
@@ -701,7 +716,7 @@ public class inputpenjualan extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getApplicationContext(), String.valueOf(bayar), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), String.valueOf(bayar), Toast.LENGTH_LONG).show();
 
                 bayarnya=bayar;
                 simpandata();
@@ -734,7 +749,10 @@ public class inputpenjualan extends AppCompatActivity {
             Toast.makeText(this, "Bantu dong", Toast.LENGTH_SHORT).show();
             // startActivity(new Intent(this, bantuan.class));
         }
+        else if (item.getItemId() == R.id.data) {
+            startActivity(new Intent(this, DataPenjualan.class));
+        }
 
-        return true;
+            return true;
     }
 }
