@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -32,14 +34,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import java.util.ArrayList;
 public class halamanutama extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-
+    DataHelper dbHelper;
     private boolean menutst = false;
     private Toolbar toolbar;
     ImageView fotoku;
@@ -56,13 +62,60 @@ public class halamanutama extends AppCompatActivity {
         setContentView(R.layout.activity_halamanutama);
         sharedpreferences = getSharedPreferences("sesi", MODE_PRIVATE);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        dbHelper = new DataHelper(this);
+
         setSupportActionBar(toolbar);
         menusamping();
         loadlogo();
-
+        tampilgrafik();
 
     }
 
+    private void tampilgrafik(){
+        BarChart chart = (BarChart) findViewById(R.id.chart);
+        BarData data = new BarData(getXAxisValues(), getDataSet());
+        //  BarData datas = new BarData();
+        chart.setData(data);
+        chart.setDescription(getString(R.string.penjualan) );
+        chart.animateXY(2000, 2000);
+        chart.invalidate();
+    }
+
+    private ArrayList<IBarDataSet> getDataSet() {
+        ArrayList<IBarDataSet> dataSets = null;
+        ArrayList<BarEntry> valueSet1 = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor result = db.rawQuery("select sum(c_total) ttl from t_penjualan group by c_tanggal order by c_tanggal", null);
+        //result.moveToFirst();
+        int i=0;
+        while(result.moveToNext()) {
+            Toast.makeText(getApplicationContext(), "Kesalahan Terjadi ", Toast.LENGTH_SHORT).show();
+            BarEntry v1e1 = new BarEntry(result.getInt(result.getColumnIndex("ttl")), i); // Jan
+            valueSet1.add(v1e1);
+            i=i+1;
+        }
+        BarDataSet barDataSet1 = new BarDataSet(valueSet1, getString( R.string.penjualan));
+        barDataSet1.setColor(Color.rgb(0, 155, 0));
+        //BarDataSet barDataSet2 = new BarDataSet(valueSet2, "Mie Ayam");
+        //barDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
+        //barDataSet2.setColor(Color.rgb(193, 37, 82));
+        dataSets = new ArrayList<>();
+        dataSets.add(barDataSet1);
+        //dataSets.add(barDataSet2);
+        return dataSets;
+    }
+    private ArrayList<String> getXAxisValues() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor result = db.rawQuery("select strftime('%d-%m-%Y', c_tanggal) tgl from t_penjualan group by c_tanggal order by c_tanggal", null);
+
+        ArrayList<String> xAxis = new ArrayList<>();
+        while(result.moveToNext()) {
+            xAxis.add(result.getString(result.getColumnIndex("tgl")));
+
+        }
+        return xAxis;
+    }
     public void loadlogo(){
         fotoku = (ImageView)header.findViewById(R.id.logotoko);
         String poto=sharedpreferences.getString("fotoku","");
