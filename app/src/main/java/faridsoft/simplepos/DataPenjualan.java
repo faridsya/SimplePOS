@@ -88,7 +88,7 @@ String namapelanggan;
         // result.getCount();
         daftar = new String[result.getCount()];
         arraylist.clear();
-        int i=0;
+        int i=0;;
         while(result.moveToNext()){
             if(result.getString(result.getColumnIndex("c_pelanggan"))==null )namapelanggan=getString( R.string.tanpapelanggan) ;else namapelanggan=result.getString(result.getColumnIndex("c_pelanggan"));
 
