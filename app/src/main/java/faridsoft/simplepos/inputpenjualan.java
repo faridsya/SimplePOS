@@ -755,4 +755,13 @@ public class inputpenjualan extends AppCompatActivity {
 
             return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, halamanutama.class);
+
+
+        setResult(66, intent);
+        finish();
+    }
 }

@@ -89,7 +89,7 @@ public class halamanutama extends AppCompatActivity {
         //result.moveToFirst();
         int i=0;
         while(result.moveToNext()) {
-            Toast.makeText(getApplicationContext(), "Kesalahan Terjadi ", Toast.LENGTH_SHORT).show();
+
             BarEntry v1e1 = new BarEntry(result.getInt(result.getColumnIndex("ttl")), i); // Jan
             valueSet1.add(v1e1);
             i=i+1;
@@ -290,7 +290,9 @@ public class halamanutama extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.mnpenjualan:
-                        startActivity(new Intent(halamanutama.this, inputpenjualan.class));
+                        Intent i = new Intent(halamanutama.this, inputpenjualan.class);
+                        startActivityForResult(i, 1);
+                        //startActivity(new Intent(halamanutama.this, inputpenjualan.class));
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.mnsatuan:
@@ -399,6 +401,10 @@ public class halamanutama extends AppCompatActivity {
             Intent intent = getIntent();
             finish();
             startActivity(intent);
+        }
+
+        else if(resultCode==66){
+            tampilgrafik();
         }
     }
     private void onSelectFromGalleryResult(Intent data) {

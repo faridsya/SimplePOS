@@ -142,7 +142,7 @@ public class inputsesuai extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 if(txtkode.getText().toString().matches("")||txtnama.getText().toString().matches("")||txtjum.getText().toString().matches("")||
                        tanggalsesuai.matches("")){
-                    Toast.makeText(getApplicationContext(), "Data belum lengkap!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.belumlengkap, Toast.LENGTH_LONG).show();
                     return;
                 }
                 simpandata();
@@ -233,7 +233,7 @@ public class inputsesuai extends AppCompatActivity {
                     txtkode.getText().toString() + "','" +
                     txtjum.getText().toString() + "','" +
                     txtket.getText().toString() + "')");
-            Toast.makeText(getApplicationContext(), "Data berhasil disimpan!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.suksessimpan, Toast.LENGTH_LONG).show();
 
             kosong();
         }
@@ -243,7 +243,7 @@ public class inputsesuai extends AppCompatActivity {
 
 
             db.execSQL("update t_sesuai set c_jumlah='" +  txtjum.getText().toString() + "',c_alasan='" +txtket.getText().toString() + "',c_tanggal='" +tanggalsesuai +"' where id='" + kodeedit +"'");
-                Toast.makeText(getApplicationContext(), "Data berhasil diubah!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.suksesubah, Toast.LENGTH_LONG).show();
                 kosong();
 
 
