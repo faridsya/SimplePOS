@@ -80,5 +80,6 @@
     <string name="datapelanggan">Customer List</string>
     <string name="datapenjualan">Sales List</string>
     <string name="tanpapelanggan">No Customer</string>
+    <string name="detilbarang">Detail Product</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

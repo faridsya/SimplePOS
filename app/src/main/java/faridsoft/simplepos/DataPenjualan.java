@@ -23,7 +23,7 @@ public class DataPenjualan extends AppCompatActivity implements AbsListView.OnSc
     DataHelper dbHelper;
     ListView listView;
     String[] daftar;
-    Listsesuai adapter;
+    ListDataJual adapter;
     private ProgressBar progressBar;
     private Handler mHandler;
     EditText editsearch;
@@ -103,7 +103,7 @@ String namapelanggan;
 
         listView = (ListView) findViewById(R.id.listview);
         listView.addFooterView(footer);
-        adapter = new Listsesuai(this,R.layout.listpenjualan,arraylist,20,10);
+        adapter = new ListDataJual(this,R.layout.listpenjualan,arraylist,20,10);
         listView.setAdapter(adapter);
         listView.setSelected(true);
         listView.setScrollContainer(false);
