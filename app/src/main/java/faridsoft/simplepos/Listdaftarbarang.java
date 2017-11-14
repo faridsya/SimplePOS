@@ -74,7 +74,7 @@ public class Listdaftarbarang extends BaseAdapter {
         this.posisi=position;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.daftarbarang, null);
+            view = inflater.inflate(R.layout.daftarbarangjual, null);
             // Locate the TextViews in listview_item.xml
 
             holder.kodebrg = (TextView) view.findViewById(R.id.txtkode);

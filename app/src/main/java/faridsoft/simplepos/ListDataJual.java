@@ -127,11 +127,11 @@ public class ListDataJual extends BaseAdapter {
                             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                 @Override
                                 public boolean onMenuItemClick(MenuItem item) {
-                                    final int kodekat = datatemenlist.get(position).getid();
+                                    final String kodekat = datatemenlist.get(position).getKodebrg();
                                     switch (item.getItemId()) {
-                                        case R.id.update:
+                                        case R.id.detil:
 
-                                            ((Datasesuai)mContext).apdet(kodekat);
+                                            ((DataPenjualan)mContext).detilbarang(kodekat);
                                             break;
                                         case R.id.hapus:
                                             new AlertDialog.Builder(mContext)

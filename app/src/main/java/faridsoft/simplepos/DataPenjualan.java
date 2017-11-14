@@ -1,5 +1,7 @@
 package faridsoft.simplepos;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,26 +11,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class DataPenjualan extends AppCompatActivity implements AbsListView.OnScrollListener {
     DataHelper dbHelper;
-    ListView listView;
+    ListView listView, listView2;
+    ;
     String[] daftar;
     ListDataJual adapter;
+    Listdaftarbarang adapter2;
     private ProgressBar progressBar;
     private Handler mHandler;
     EditText editsearch;
     View footer;
     ArrayList<itemsesuai> arraylist = new ArrayList<itemsesuai>();
+    ArrayList<itemdaftarbarang> arraylist2 = new ArrayList<itemdaftarbarang>();
     DecimalFormat formatter = new DecimalFormat("#,###,###");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,7 @@ public class DataPenjualan extends AppCompatActivity implements AbsListView.OnSc
         progressBar = (ProgressBar) footer.findViewById(R.id.progressBar);
         datasupplier("");
         mHandler = new Handler();
+
 
         editsearch = (EditText) findViewById(R.id.search);
 
@@ -75,6 +87,54 @@ public class DataPenjualan extends AppCompatActivity implements AbsListView.OnSc
             }
         });
 
+    }
+
+
+    public void detilbarang(final String kode) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<String> datakode = new ArrayList<>();
+        Double ttl;
+        ArrayList<String> datanama = new ArrayList<>();
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.detilbarangdijual, null);
+        dialogBuilder.setView(dialogView);
+        //Toast.makeText(getApplicationContext(), kode, Toast.LENGTH_LONG).show();
+
+        Cursor result = db.rawQuery("select d.*,c_deskripsi from t_penjualandetil d join t_barang b on d.c_kodebrg=b.c_kodebrg where c_idpenjualan= '"+kode+"'"+" order by c_deskripsi", null);
+        arraylist2.clear();
+
+
+        while(result.moveToNext()){
+            ttl= result.getDouble(result.getColumnIndex("c_jumlahbrg")) * result.getDouble(result.getColumnIndex("c_hargajual"));
+
+
+            itemdaftarbarang wp = new  itemdaftarbarang (result.getString(result.getColumnIndex("c_kodebrg")), result.getString(result.getColumnIndex("c_deskripsi")),result.getString(result.getColumnIndex("c_jumlahbrg")) + " x " + result.getString(result.getColumnIndex("c_hargajual")),formatter.format(ttl));
+            arraylist2.add(wp);
+
+        }
+
+
+        listView2 = (ListView) dialogView.findViewById(R.id.list_barang);
+        //ImageView bi = (ImageView) dialogView.findViewById(R.id.image_view2);
+        //bi.setVisibility(View.GONE);
+        listView.addFooterView(footer);
+        adapter2 = new Listdaftarbarang(DataPenjualan.this,arraylist2 ,20,10);
+
+        listView2.setAdapter(adapter2);
+
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //Toast.makeText(getApplicationContext(), modal, Toast.LENGTH_LONG).show();
+
+
+                //Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 
     public void datasupplier(String nama) {
