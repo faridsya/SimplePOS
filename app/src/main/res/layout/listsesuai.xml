@@ -7,7 +7,7 @@
         android:id="@+id/image_view"
         android:layout_width="50dp"
         android:layout_height="50dp"
-
+        android:layout_centerVertical="true"
         android:contentDescription="@string/app_name" />
 
     <TextView
@@ -66,6 +66,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_weight="10"
+        android:layout_centerVertical="true"
         android:src="@drawable/ic_menu"
         android:layout_alignParentRight="true"
         android:contentDescription="@string/app_name" />

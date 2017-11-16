@@ -139,7 +139,7 @@ public class DataPenjualan extends AppCompatActivity implements AbsListView.OnSc
 
     public void datasupplier(String nama) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-String namapelanggan;
+        String namapelanggan;
        // Cursor result = db.rawQuery("select s.*,c_deskripsi,strftime('%d-%m-%Y', c_tanggal) tgl from t_sesuai s join t_barang b on s.c_kodebrg=b.c_kodebrg where c_deskripsi like '%"+nama+"%' order by c_tanggal desc,id desc", null);
         Cursor result = db.rawQuery("select p.*,c_pelanggan,strftime('%d-%m-%Y', c_tanggal) tgl from t_penjualan p  left join t_pelanggan c on p.c_idpelanggan=c.c_idpelanggan  order by c_tanggal desc,c_idpenjualan desc", null);
 

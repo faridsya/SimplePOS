@@ -81,5 +81,9 @@
     <string name="datapenjualan">Sales List</string>
     <string name="tanpapelanggan">No Customer</string>
     <string name="detilbarang">Detail Product</string>
+    <string name="kembalian">Change</string>
+    <string name="proses">Proceed ?</string>
+    <string name="piutang">Receivable</string>
+    <string name="keuangan">Finance</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

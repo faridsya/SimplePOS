@@ -58,6 +58,11 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS t_penjualandetil");
         db.execSQL("create table t_penjualandetil(c_idpenjualan varchar(50), c_kodebrg varchar(50),`c_jumlahbrg` double(6,2) NOT NULL DEFAULT '0.00',`c_hargabeli` double(10,2) NOT NULL DEFAULT '0.00',`c_hargajual` double(10,2) NOT NULL DEFAULT '0.00',primary key(c_idpenjualan,c_kodebrg))");
 
+
+        db.execSQL("DROP TABLE IF EXISTS t_piutang");
+        db.execSQL("create table t_piutang(c_idpenjualan varchar(50), c_idpelanggan varchar(50),c_tanggal date not null,`c_jumlahpiutang` double(10,2) NOT NULL DEFAULT '0.00',`c_jumlahbayar` double(10,2) NOT NULL DEFAULT '0.00',c_jatuhtempo date not null,primary key(c_idpenjualan,c_idpelanggan))");
+
+
         db.execSQL("CREATE TRIGGER if not exists tsesuai_ai   \n" +
                 "   AFTER INSERT  \n" +
                 " ON[t_sesuai]  \n" +
@@ -78,6 +83,15 @@ public class DataHelper extends SQLiteOpenHelper {
                 "   for each row  \n" +
                 "     BEGIN  \n" +
                 "        update t_barang set c_stok=c_stok-(old.c_jumlah)+new.c_jumlah where c_kodebrg=old.c_kodebrg;  \n" +
+                "     END;  ;");
+
+        db.execSQL("CREATE TRIGGER if not exists tpenjualan_ai   \n" +
+                "   AFTER INSERT  \n" +
+                " ON[t_penjualan]  \n" +
+                "   for each row  \n" +
+                "        WHEN new.c_cash<new.c_total " +
+                "     BEGIN  \n" +
+                "        insert into t_piutang(c_idpenjualan,c_idpelanggan,c_tanggal,c_jumlahpiutang,c_jatuhtempo) values(new.c_idpenjualan,new.c_idpelanggan,new.c_tanggal,(new.c_total-new.c_cash),date(new.c_tanggal,'+' || new.c_hari || ' day'));  \n" +
                 "     END;  ;");
 
 

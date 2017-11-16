@@ -309,6 +309,10 @@ public class halamanutama extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         return true;
 
+                    case R.id.daftarpiutang:
+                        startActivity(new Intent(halamanutama.this, DataPiutang.class));
+                        drawerLayout.closeDrawers();
+                        return true;
                     case R.id.navigation4:
                         //startActivity(new Intent(halamanutama.this, Pengaturan.class));
                         Intent intent = new Intent(halamanutama.this, Pengaturan.class);

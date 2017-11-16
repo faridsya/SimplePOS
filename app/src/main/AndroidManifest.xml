@@ -45,6 +45,7 @@
         <activity android:name=".inputpenjualan"></activity>
         <activity android:name=".PengaturanJual"></activity>
         <activity android:name=".DataPenjualan"></activity>
+        <activity android:name=".DataPiutang"></activity>
     </application>
 
 </manifest>

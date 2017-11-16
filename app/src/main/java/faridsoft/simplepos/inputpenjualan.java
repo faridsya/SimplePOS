@@ -60,7 +60,8 @@ public class inputpenjualan extends AppCompatActivity {
     Double pph=0.0;
     Double totaljual=0.0;
     Double diskonjual=0.0;
-
+    Double kembalian=0.0;
+    Double piutang=0.0;
     Double bayarnya=0.0;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter,tanggal;
@@ -512,6 +513,42 @@ public class inputpenjualan extends AppCompatActivity {
     }
 
 
+    public void cekjumlahbayar() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        String pesan="";
+
+        if(bayarnya>grantotal(totalharga(),pph,diskonjual)){
+            kembalian=bayarnya-grantotal(totalharga(),pph,diskonjual);
+             pesan=getString(R.string.kembalian)+" "+formatter.format(kembalian)+". "+getString(R.string.proses);
+
+
+        }
+        else if(bayarnya<grantotal(totalharga(),pph,diskonjual)){
+            piutang=grantotal(totalharga(),pph,diskonjual)-bayarnya;
+             pesan=getString(R.string.piutang)+" "+formatter.format(piutang)+". "+getString(R.string.proses);
+
+        }
+        else if(bayarnya==grantotal(totalharga(),pph,diskonjual)) pesan=getString(R.string.proses);
+
+        dialogBuilder.setMessage(pesan);
+
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                simpandata();
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.batal, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+
+
     public void detilbarangapdet(final String kode,final String nama,String stok,final String harga,final String harga2,final int posisi) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -719,7 +756,8 @@ public class inputpenjualan extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), String.valueOf(bayar), Toast.LENGTH_LONG).show();
 
                 bayarnya=bayar;
-                simpandata();
+                cekjumlahbayar();
+                //simpandata();
 
             }
         });
