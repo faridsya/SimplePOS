@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             login = sharedpreferences.getBoolean("login", false);
             if(!login) {
                // Intent i = new Intent(getApplicationContext(), activity_login.class);
-                Intent i = new Intent(getApplicationContext(), halamanutama.class);
+                Intent i = new Intent(getApplicationContext(), PDF.class);
                 startActivity(i);
                 finish();
             }

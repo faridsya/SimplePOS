@@ -144,12 +144,12 @@ public class ListDataJual extends BaseAdapter {
                                                             dbHelper = new DataHelper(mContext);
                                                             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                                                            db.execSQL("delete from t_sesuai where id = '"+kodekat+"'");
+                                                            db.execSQL("delete from t_penjualan where c_idpenjualan = '"+kodekat+"'");
                                                             Toast.makeText(mContext, R.string.sukses, Toast.LENGTH_LONG).show();
-                                                            if(mContext instanceof Datasesuai){
-                                                                ((Datasesuai)mContext).datasupplier("");
+                                                            if(mContext instanceof DataPenjualan){
+                                                                ((DataPenjualan)mContext).datasupplier("");
                                                             }
-                                                            EditText txtcari = (EditText) ((Datasesuai)mContext).findViewById(R.id.search);
+                                                            EditText txtcari = (EditText) ((DataPenjualan)mContext).findViewById(R.id.search);
                                                             txtcari.setText("");
 
                                                         }

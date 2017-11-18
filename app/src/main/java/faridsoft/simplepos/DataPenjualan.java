@@ -104,7 +104,6 @@ public class DataPenjualan extends AppCompatActivity implements AbsListView.OnSc
         Cursor result = db.rawQuery("select d.*,c_deskripsi from t_penjualandetil d join t_barang b on d.c_kodebrg=b.c_kodebrg where c_idpenjualan= '"+kode+"'"+" order by c_deskripsi", null);
         arraylist2.clear();
 
-
         while(result.moveToNext()){
             ttl= result.getDouble(result.getColumnIndex("c_jumlahbrg")) * result.getDouble(result.getColumnIndex("c_hargajual"));
 

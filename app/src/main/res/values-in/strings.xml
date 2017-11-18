@@ -85,5 +85,8 @@
     <string name="proses">Proses ?</string>
     <string name="piutang">Piutang</string>
     <string name="keuangan">Keuangan</string>
+    <string name="bayarpiutang">Pembayaran piutang</string>
+    <string name="sejarahpembayaran">Sejarah pembayaran</string>
+    <string name="pelanggankosong">Pelanggan kosong!!!</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

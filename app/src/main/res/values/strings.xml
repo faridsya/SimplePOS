@@ -85,5 +85,8 @@
     <string name="proses">Proceed ?</string>
     <string name="piutang">Receivable</string>
     <string name="keuangan">Finance</string>
+    <string name="bayarpiutang">Receivables Payment</string>
+    <string name="sejarahpembayaran">Payment history</string>
+    <string name="pelanggankosong">Empty Customer!!!</string>
     <string name="urlserver">http://undanganfarid.com/android/</string>
 </resources>

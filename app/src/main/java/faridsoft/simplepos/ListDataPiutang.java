@@ -124,7 +124,7 @@ public class ListDataPiutang extends BaseAdapter {
                         case R.id.image_view2:
 
                             PopupMenu popup = new PopupMenu(mContext, v);
-                            popup.getMenuInflater().inflate(R.menu.menu_datajual,
+                            popup.getMenuInflater().inflate(R.menu.menu_piutang,
                                     popup.getMenu());
                             popup.show();
                             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

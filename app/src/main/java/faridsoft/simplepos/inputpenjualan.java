@@ -46,7 +46,7 @@ public class inputpenjualan extends AppCompatActivity {
     boolean edit;
     EditText txtkode, text2,txtcari;
     private ListView listView;
-    private String idpelanggan;
+    private String idpelanggan="";
     Listdaftarbarang adapter;
     TextView txttotal;
     RelativeLayout kotak;
@@ -342,8 +342,7 @@ public class inputpenjualan extends AppCompatActivity {
     adapter.notifyDataSetChanged();
     listView.setAdapter(null);
     txttotal.setText("");
-    idpelanggan="";
-    tanggaljual = tanggal.format(Calendar.getInstance().getTime());
+        tanggaljual = tanggal.format(Calendar.getInstance().getTime());
     }
 
     private boolean cekvalidasi(String kode){
@@ -756,6 +755,10 @@ public class inputpenjualan extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), String.valueOf(bayar), Toast.LENGTH_LONG).show();
 
                 bayarnya=bayar;
+                if((bayarnya<grantotal(totalharga(),pph,diskonjual))&& idpelanggan.matches("")) {
+                    Toast.makeText(getApplicationContext(), R.string.pelanggankosong, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 cekjumlahbayar();
                 //simpandata();
 

@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,11 +43,12 @@
         <activity android:name=".inputsesuai" />
         <activity android:name=".Datacaribarang" />
         <activity android:name=".Datasesuai" />
-        <activity android:name=".Pengaturan"></activity>
-        <activity android:name=".inputpenjualan"></activity>
-        <activity android:name=".PengaturanJual"></activity>
-        <activity android:name=".DataPenjualan"></activity>
-        <activity android:name=".DataPiutang"></activity>
+        <activity android:name=".Pengaturan" />
+        <activity android:name=".inputpenjualan" />
+        <activity android:name=".PengaturanJual" />
+        <activity android:name=".DataPenjualan" />
+        <activity android:name=".DataPiutang" />
+        <activity android:name=".PDF"></activity>
     </application>
 
 </manifest>

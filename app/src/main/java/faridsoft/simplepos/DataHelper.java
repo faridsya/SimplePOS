@@ -94,6 +94,30 @@ public class DataHelper extends SQLiteOpenHelper {
                 "        insert into t_piutang(c_idpenjualan,c_idpelanggan,c_tanggal,c_jumlahpiutang,c_jatuhtempo) values(new.c_idpenjualan,new.c_idpelanggan,new.c_tanggal,(new.c_total-new.c_cash),date(new.c_tanggal,'+' || new.c_hari || ' day'));  \n" +
                 "     END;  ;");
 
+        db.execSQL("CREATE TRIGGER if not exists tpenjualan_ad   \n" +
+                "   AFTER DELETE  \n" +
+                " ON[t_penjualan]  \n" +
+                "   for each row  \n" +
+                "     BEGIN  \n" +
+                "        delete from t_piutang where c_idpenjualan=old.c_idpenjualan;  \n" +
+                "        delete from t_penjualandetil where c_idpenjualan=old.c_idpenjualan;  \n" +
+                "     END;  ;");
+
+        db.execSQL("CREATE TRIGGER if not exists tpenjualandetil_ai   \n" +
+                "   AFTER INSERT  \n" +
+                " ON[t_penjualandetil]  \n" +
+                "   for each row  \n" +
+                "     BEGIN  \n" +
+                "        update t_barang set c_stok=c_stok-new.c_jumlahbrg where c_kodebrg=new.c_kodebrg;  \n" +
+                "     END;  ;");
+
+        db.execSQL("CREATE TRIGGER if not exists tpenjualandetil_ad   \n" +
+                "   AFTER Delete  \n" +
+                " ON[t_penjualandetil]  \n" +
+                "   for each row  \n" +
+                "     BEGIN  \n" +
+                "        update t_barang set c_stok=c_stok+old.c_jumlahbrg where c_kodebrg=old.c_kodebrg;  \n" +
+                "     END;  ;");
 
     }
 
